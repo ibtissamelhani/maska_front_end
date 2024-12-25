@@ -1,4 +1,4 @@
-<nav x-data="{ isOpen: false }" class="relative shadow bg-green-900/30 dark:bg-gray-800">
+<nav x-data="{ isOpen: false }" class="bg-green-900/30 shadow dark:bg-gray-800">
     <div class="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
         <div class="flex items-center justify-between">
             <a routerLink=""  class="text-red-600" href="#">
@@ -22,8 +22,8 @@
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <div x-cloak :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']" class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center">
                 <div class="flex items-center mt-2 -mx-2 sm:mt-0">
-                    <a href="#" class="px-3 py-2 text-m font-semibold text-red-600 transition-colors duration-300 transform border-2 rounded-md hover:bg-gray-400">Sign In</a>
-                    <a href="#" class="px-3 py-2 mx-2 text-m font-semibold text-white transition-colors duration-300 transform bg-black rounded-md hover:bg-gray-800">Sign Up</a>
+                    <a href="#" class="px-4 py-2 text-m font-semibold text-gray-800 transition-colors duration-300 transform border-2 rounded-md hover:bg-gray-100/20">Sign In</a>
+                    <a href="#" class="px-4 py-2 mx-2 text-m font-semibold text-white transition-colors duration-300 transform bg-black rounded-md hover:bg-gray-700">Sign Up</a>
                 </div>
         </div>
     </div>
