@@ -4,6 +4,7 @@ import { AuthComponent } from './shared/auth/auth.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import {AdminComponent} from "./shared/admin/admin.component";
+import {DashboardComponent} from "./pages/admin/dashboard/dashboard.component";
 
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
@@ -19,5 +20,12 @@ export const routes: Routes = [
             }
         ]
     },
-  {'path' : 'dashboard', component: AdminComponent}
+  {'path' : 'admin', component: AdminComponent,
+      children:[
+        {
+          'path': 'dashboard',
+          component: DashboardComponent
+        }
+      ]
+  }
 ];
