@@ -7,21 +7,17 @@ export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>, 
   next: HttpHandlerFn
 ) => {
-  // Inject Router at the top level
   const router = inject(Router);
   
-  // Get token from localStorage
   const token = localStorage.getItem('token');
   
-  // Clone the request and add basic headers
   let modifiedReq = req.clone({
     headers: req.headers
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
   });
 
-  // For login and register endpoints, don't add Authorization header
-  const isAuthRoute = req.url.includes('/auth/login') || req.url.includes('/auth/register');
+  const isAuthRoute = req.url.includes('/auth/authenticate') || req.url.includes('/auth/register');
   
   if (token && !isAuthRoute) {
     modifiedReq = modifiedReq.clone({
@@ -44,7 +40,7 @@ export const authInterceptor: HttpInterceptorFn = (
 
       if (error.status === 401) {
         localStorage.removeItem('token');
-        router.navigate(['auth/login']);
+        router.navigate(['/login']);
       }
 
       return throwError(() => error);
