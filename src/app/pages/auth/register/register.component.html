@@ -10,7 +10,7 @@
       </p>
     </div>
 
-    <form action="" class="">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="flex gap-x-6 mb-6">
         <div class="w-full relative">
           <label class="flex items-center mb-2 text-gray-600 text-sm font-medium">First Name
@@ -20,7 +20,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="text" id="default-search"
+          <input formControlName="firstName" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -32,7 +32,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="text" id="default-search"
+          <input formControlName="lastName" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -46,7 +46,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="text" id="default-search"
+          <input formControlName="username" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -58,7 +58,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="email" id="default-search"
+          <input formControlName="email" type="email"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -72,7 +72,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="text" id="default-search"
+          <input formControlName="cin" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -84,7 +84,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <select id="nationality"
+          <select formControlName="nationality" id="nationality"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 border border-gray-300 rounded-lg focus:outline-none"
             required>
             <option value="" disabled selected>Select your nationality</option>
@@ -109,7 +109,7 @@
                 fill="#EF4444" />
             </svg>
           </label>
-          <input type="password" id="default-search"
+          <input formControlName="password" type="password"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
         </div>
@@ -128,11 +128,13 @@
       </div>
 
       <div class="flex flex-col justify-center items-center ">
-        <button
+        <button type="submit" [disabled]="registerForm.invalid"
           class="w-52 h-12 shadow-sm text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
           Sign Up
         </button>
       </div>
     </form>
+    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
   </div>
 </div>
