@@ -26,7 +26,7 @@ export class LoginComponent {
     }
 
     const credentials= {
-      email: this.email, 
+      email: this.email,
       password: this.password
     };
 
@@ -35,9 +35,15 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
+        const userRole = this.authService.getUserRole();
+        if (userRole === 'ROLE_ADMIN') {
+          this.router.navigate(['/dashboard']);
+        } else if (userRole === 'ROLE_MEMBER') {
+          this.router.navigate(['/']);
+        } else {
+          this.errorMessage = 'Unknown role. Access denied.';
+        }
         this.loading = false;
-        // Navigate to dashboard or home page after successful login
-        this.router.navigate(['/']);
       },
       error: (error) => {
         this.loading = false;
