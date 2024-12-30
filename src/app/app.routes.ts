@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import {AdminComponent} from "./shared/admin/admin.component";
 import {DashboardComponent} from "./pages/admin/dashboard/dashboard.component";
+import {authGuard} from "./core/guards/auth.guard";
 
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
@@ -20,12 +21,13 @@ export const routes: Routes = [
             }
         ]
     },
-  {'path' : 'admin', component: AdminComponent,
-      children:[
-        {
-          'path': 'dashboard',
-          component: DashboardComponent
-        }
-      ]
-  }
+    {'path' : 'admin', component: AdminComponent,
+        children:[
+          {
+            'path': 'dashboard',
+            component: DashboardComponent,
+            canActivate: [authGuard]
+          }
+        ]
+    }
 ];
