@@ -23,6 +23,9 @@
           <input formControlName="firstName" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('firstName')?.errors?.['required']">First Name is required.</small>
+          </div>
         </div>
         <div class="w-full relative">
           <label class="flex items-center mb-2 text-gray-600 text-sm font-medium">Last Name
@@ -35,6 +38,9 @@
           <input formControlName="lastName" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required.</small>
+          </div>
         </div>
       </div>
       <div class="flex gap-x-6 mb-6">
@@ -49,6 +55,10 @@
           <input formControlName="username" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</small>
+            <small *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters long.</small>
+          </div>
         </div>
         <div class="w-full relative">
           <label class="flex items-center mb-2 text-gray-600 text-sm font-medium">Email
@@ -61,6 +71,10 @@
           <input formControlName="email" type="email"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+            <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</small>
+          </div>
         </div>
       </div>
       <div class="flex gap-x-6 mb-6">
@@ -75,6 +89,10 @@
           <input formControlName="cin" type="text"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('cin')?.touched && registerForm.get('cin')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('cin')?.errors?.['required']">CIN is required.</small>
+            <small *ngIf="registerForm.get('cin')?.errors?.['pattern']">CIN must be exactly 8 digits.</small>
+          </div>
         </div>
         <div class="w-full relative">
           <label class="flex items-center mb-2 text-gray-600 text-sm font-medium">Nationality
@@ -98,6 +116,9 @@
             <option value="Moroccan">Moroccan</option>
             <option value="Spanish">Spanish</option>
           </select>
+          <div *ngIf="registerForm.get('nationality')?.touched && registerForm.get('nationality')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('nationality')?.errors?.['required']">Nationality is required.</small>
+          </div>
         </div>
       </div>
       <div class="flex gap-x-6 mb-6">
@@ -112,6 +133,13 @@
           <input formControlName="password" type="password"
             class="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none"
             placeholder="" required="" />
+          <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="text-red-500">
+            <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+            <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+            <small *ngIf="registerForm.get('password')?.errors?.['pattern']">
+              Password must contain at least one uppercase letter, one lowercase letter, and one number.
+            </small>
+          </div>
         </div>
         <div class="w-full relative">
           <label class="flex items-center mb-2 text-gray-600 text-sm font-medium">Confirm Password

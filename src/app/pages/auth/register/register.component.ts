@@ -23,8 +23,14 @@ export class RegisterComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      cin: ['', Validators.required],
+      password: ['',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')
+        ]
+      ],
+      cin: ['', [Validators.required, Validators.pattern('\\d{8}')]],
       nationality: ['', Validators.required],
       role: ['MEMBER'],
     });

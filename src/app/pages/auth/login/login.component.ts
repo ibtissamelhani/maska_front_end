@@ -47,7 +47,7 @@ export class LoginComponent {
       },
       error: (error) => {
         this.loading = false;
-        this.errorMessage = error.error?.message || 'An error occurred during login';
+        this.errorMessage = error.error?.message || 'An error occurred during login check your credentials';
       }
     });
   }

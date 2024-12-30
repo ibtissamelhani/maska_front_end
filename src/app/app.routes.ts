@@ -13,7 +13,6 @@ import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
     {'path': 'forbidden', component: ForbiddenComponent },
-    {'path': '**', component: NotFoundComponent },
     {'path': 'auth', component: AuthComponent,
         children: [
             {
@@ -34,5 +33,6 @@ export const routes: Routes = [
           }
         ],
       canActivate: [authGuard,adminGuard]
-    }
+    },
+    {'path': '**', component: NotFoundComponent },
 ];
