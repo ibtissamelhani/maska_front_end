@@ -10,6 +10,7 @@ import {adminGuard} from "./core/guards/admin.guard";
 import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
 import {UserComponent} from "./pages/admin/user/user.component";
+import {UserResolverService} from "./core/resolvers/user/user-resolver.service";
 
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
@@ -34,7 +35,10 @@ export const routes: Routes = [
           },
           {
             'path': 'users',
-            component: UserComponent
+            component: UserComponent,
+            resolve:{
+              users: UserResolverService
+            }
           },
         ],
       canActivate: [authGuard,adminGuard]
