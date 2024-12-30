@@ -9,6 +9,7 @@ import {authGuard} from "./core/guards/auth.guard";
 import {adminGuard} from "./core/guards/admin.guard";
 import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
+import {UserComponent} from "./pages/admin/user/user.component";
 
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
@@ -30,7 +31,11 @@ export const routes: Routes = [
           {
             'path': 'dashboard',
             component: DashboardComponent
-          }
+          },
+          {
+            'path': 'users',
+            component: UserComponent
+          },
         ],
       canActivate: [authGuard,adminGuard]
     },
