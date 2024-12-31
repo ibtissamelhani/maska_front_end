@@ -9,6 +9,10 @@ import {authGuard} from "./core/guards/auth.guard";
 import {adminGuard} from "./core/guards/admin.guard";
 import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
+import {UserComponent} from "./pages/admin/user/user.component";
+import {UserResolverService} from "./core/resolvers/user/user-resolver.service";
+import {EditUserComponent} from "./components/forms/edit-user/edit-user.component";
+import {UsersTableComponent} from "./components/tables/users-table/users-table.component";
 
 export const routes: Routes = [
     {'path': '', component: HomeComponent},
@@ -30,7 +34,18 @@ export const routes: Routes = [
           {
             'path': 'dashboard',
             component: DashboardComponent
-          }
+          },
+          {
+            'path': 'users', component: UserComponent,
+            children: [
+              {
+                path: '',
+                component: UsersTableComponent,
+                resolve:{ users: UserResolverService }
+              },
+              {'path': 'editUser', component: EditUserComponent}
+            ]
+          },
         ],
       canActivate: [authGuard,adminGuard]
     },
