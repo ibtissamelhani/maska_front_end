@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {API_BASE_URL} from "../constants/constants";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../interfaces/user";
 import {Page} from "../interfaces/page";
+import {SearchUser} from "../interfaces/search-user";
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,9 @@ export class UserService {
   deleteUser(userId: string): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/users/delete/${userId}`);
   }
+
+  searchUsers(searchCriteria: SearchUser): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/users/search`, searchCriteria);
+  }
+
 }

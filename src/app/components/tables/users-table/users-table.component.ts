@@ -4,6 +4,9 @@ import {User} from "../../../core/interfaces/user";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/interfaces/page";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {debounceTime, distinctUntilChanged} from "rxjs";
+import {SearchUser} from "../../../core/interfaces/search-user";
 
 @Component({
   selector: 'app-users-table',
@@ -12,26 +15,42 @@ import {Page} from "../../../core/interfaces/page";
     CommonModule,
     DatePipe,
     NgForOf,
-    RouterLink
+    RouterLink,
+    ReactiveFormsModule
   ],
   templateUrl: './users-table.component.html',
 })
 export class UsersTableComponent  implements OnInit{
 
-
+  isLoading = false;
+  searchForm: FormGroup;
   users: User[] = [];
   totalElements = 0;
   totalPages = 0;
   currentPage = 0;
   pageSize = 10;
 
-  constructor(private route : ActivatedRoute, private userService: UserService) {
+  constructor(private route : ActivatedRoute, private userService: UserService,private fb: FormBuilder)
+  {
+    this.searchForm = this.fb.group({
+      username: [''],
+      email: ['']
+    });
   }
 
   ngOnInit(): void {
     // Load resolved data for the first page
     const resolvedData: Page<User> = this.route.snapshot.data['users'];
     this.updatePageData(resolvedData);
+
+    this.searchForm.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged()
+      )
+      .subscribe(values => {
+        this.searchUsers(values);
+      });
   }
 
   private updatePageData(data: Page<User>): void {
@@ -76,5 +95,20 @@ export class UsersTableComponent  implements OnInit{
         },
       });
     }
+  }
+
+  searchUsers(criteria: SearchUser) {
+    this.isLoading = true;
+    this.userService.searchUsers(criteria)
+      .subscribe({
+        next: (results) => {
+          this.users = results;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Search error:', error);
+          this.isLoading = false;
+        }
+      });
   }
 }
