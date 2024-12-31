@@ -58,4 +58,19 @@ export class UserComponent implements OnInit{
     });
   }
 
+  deleteUser(userId: string): void {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          alert('User deleted successfully');
+          this.fetchUsers();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete user');
+        },
+      });
+    }
+  }
+
 }

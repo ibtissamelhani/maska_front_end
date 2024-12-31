@@ -16,4 +16,8 @@ export class UserService {
   getPaginatedUsers(page: number, size: number): Observable<Page<User>> {
     return this.http.get<Page<User>>(`${this.apiUrl}/users?page=${page}&size=${size}`);
   }
+
+  deleteUser(userId: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/users/delete/${userId}`);
+  }
 }
