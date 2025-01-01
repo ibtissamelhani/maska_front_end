@@ -13,41 +13,43 @@ import {UserComponent} from "./pages/admin/user/user.component";
 import {UserResolverService} from "./core/resolvers/user/user-resolver.service";
 import {EditUserComponent} from "./components/forms/edit-user/edit-user.component";
 import {UsersTableComponent} from "./components/tables/users-table/users-table.component";
+import {LandingComponent} from "./pages/landing/landing.component";
 
 export const routes: Routes = [
-    {'path': '', component: HomeComponent},
-    {'path': 'forbidden', component: ForbiddenComponent },
-    {'path': 'auth', component: AuthComponent,
+    { path: '', component: HomeComponent},
+    { path: 'forbidden', component: ForbiddenComponent },
+    { path: 'auth', component: AuthComponent,
         children: [
             {
-                'path': "register",
+                path: "register",
                 component: RegisterComponent,
             },
             {
-                'path': "login",
+                path: "login",
                 component: LoginComponent,
             }
         ]
     },
-    {'path' : 'admin', component: AdminComponent,
+    {   path : 'admin', component: AdminComponent,
         children:[
           {
-            'path': 'dashboard',
+            path: 'dashboard',
             component: DashboardComponent
           },
           {
-            'path': 'users', component: UserComponent,
+            path: 'users', component: UserComponent,
             children: [
               {
                 path: '',
                 component: UsersTableComponent,
                 resolve:{ users: UserResolverService }
               },
-              {'path': 'editUser', component: EditUserComponent}
+              { path: 'editUser', component: EditUserComponent}
             ]
           },
         ],
       canActivate: [authGuard,adminGuard]
     },
-    {'path': '**', component: NotFoundComponent },
+    { path: "landing" , component:LandingComponent},
+    { path: '**', component: NotFoundComponent },
 ];

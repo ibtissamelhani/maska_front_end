@@ -39,7 +39,7 @@ export class LoginComponent {
         if (userRole === 'ROLE_ADMIN') {
           this.router.navigate(['/admin/dashboard']);
         } else if (userRole === 'ROLE_MEMBER') {
-          this.router.navigate(['/']);
+          this.router.navigate(['/landing']);
         } else {
           this.errorMessage = 'Unknown role. Access denied.';
         }
