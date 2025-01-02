@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {IndexNavbarComponent} from "../../components/navbars/index-navbar/index-navbar.component";
+import {IndexNavbarComponent} from "../../../components/navbars/index-navbar/index-navbar.component";
 import {CommonModule, NgForOf} from "@angular/common";
-import {Competition} from "../../core/interfaces/competition";
-import {CompetitionService} from "../../core/services/competition.service";
-import {ActivatedRoute} from "@angular/router";
-import {Page} from "../../core/interfaces/page";
+import {Competition} from "../../../core/interfaces/competition";
+import {CompetitionService} from "../../../core/services/competition.service";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {Page} from "../../../core/interfaces/page";
 
 @Component({
   selector: 'app-landing',
@@ -13,6 +13,7 @@ import {Page} from "../../core/interfaces/page";
     IndexNavbarComponent,
     CommonModule,
     NgForOf,
+    RouterLink,
   ],
   templateUrl: './landing.component.html',
   styles: ``
@@ -68,4 +69,18 @@ export class LandingComponent implements OnInit{
       this.updatePageData(data);
     });
   }
+
+  getSpeciesImage(speciesType: string): string {
+    switch (speciesType) {
+      case 'BIG_GAME':
+        return 'big.webp';
+      case 'SEA':
+        return 'sea.webp';
+      case 'BIRD':
+        return 'bird.webp';
+      default:
+        return 'f.jpg';
+    }
+  }
+
 }

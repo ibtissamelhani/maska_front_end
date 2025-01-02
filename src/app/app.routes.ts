@@ -13,8 +13,9 @@ import {UserComponent} from "./pages/admin/user/user.component";
 import {UserResolverService} from "./core/resolvers/user-resolver.service";
 import {EditUserComponent} from "./components/forms/edit-user/edit-user.component";
 import {UsersTableComponent} from "./components/tables/users-table/users-table.component";
-import {LandingComponent} from "./pages/landing/landing.component";
+import {LandingComponent} from "./pages/user/landing/landing.component";
 import {competitionResolver} from "./core/resolvers/competition.resolver";
+import {CompetitionDetailsComponent} from "./pages/user/competition-details/competition-details.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -51,11 +52,16 @@ export const routes: Routes = [
         ],
       canActivate: [authGuard,adminGuard]
     },
-    { path: "landing" , component:LandingComponent,
+    {
+      path: "landing" ,
+      component:LandingComponent,
       resolve: {
         competitions: competitionResolver
-      },
-      data: { preload: true }
+      }
+    },
+    {
+      path: "details",
+      component: CompetitionDetailsComponent
     },
     { path: '**', component: NotFoundComponent },
 ];
