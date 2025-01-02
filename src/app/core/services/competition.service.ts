@@ -16,4 +16,9 @@ export class CompetitionService {
   getPaginatedCompetitions(page: number, size: number): Observable<Page<Competition>> {
     return this.http.get<Page<Competition>>(`${this.apiUrl}/competition?page=${page}&size=${size}`)
   }
+
+  getCompetitionDetails(id: string): Observable<Competition> {
+    return this.http.get<Competition>(`${this.apiUrl}/competition/${id}`);
+  }
+
 }
