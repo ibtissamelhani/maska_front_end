@@ -1,18 +1,64 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IndexNavbarComponent} from "../../components/navbars/index-navbar/index-navbar.component";
-import {AuthNavbarComponent} from "../../components/navbars/auth-navbar/auth-navbar.component";
-import {CompetitionsComponent} from "../../components/tables/competitions/competitions.component";
+import {CommonModule, NgForOf} from "@angular/common";
+import {Competition} from "../../core/interfaces/competition";
+import {CompetitionService} from "../../core/services/competition.service";
+import {ActivatedRoute} from "@angular/router";
+import {Page} from "../../core/interfaces/page";
+import {User} from "../../core/interfaces/user";
 
 @Component({
   selector: 'app-landing',
   standalone: true,
   imports: [
     IndexNavbarComponent,
-    CompetitionsComponent
+    CommonModule,
+    NgForOf,
   ],
   templateUrl: './landing.component.html',
   styles: ``
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit{
 
+  competitions: Competition[] = [];
+  totalElements = 0;
+  totalPages = 0;
+  currentPage = 0;
+  pageSize = 12;
+
+  constructor(private competitionService: CompetitionService,private route: ActivatedRoute ) {
+  }
+
+  ngOnInit() {
+    const resolvedData: Page<Competition> = this.route.snapshot.data['competitions'];
+    this.updatePageData(resolvedData);
+  }
+
+  private updatePageData(data: Page<Competition>): void {
+    this.competitions = data.content;
+    this.totalElements = data.totalElements;
+    this.totalPages = data.totalPages;
+    this.currentPage = data.number;
+  }
+
+  onPreviousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.fetchCompetition();
+    }
+  }
+
+  onNextPage(): void {
+    if (this.currentPage + 1 < this.totalPages) {
+      this.currentPage++;
+      this.fetchCompetition();
+    }
+  }
+
+  // Fetch users dynamically for the current page
+  private fetchCompetition(): void {
+    this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
+      this.updatePageData(data);
+    });
+  }
 }

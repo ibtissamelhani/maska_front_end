@@ -10,10 +10,11 @@ import {adminGuard} from "./core/guards/admin.guard";
 import {ForbiddenComponent} from "./pages/error/forbidden/forbidden.component";
 import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
 import {UserComponent} from "./pages/admin/user/user.component";
-import {UserResolverService} from "./core/resolvers/user/user-resolver.service";
+import {UserResolverService} from "./core/resolvers/user-resolver.service";
 import {EditUserComponent} from "./components/forms/edit-user/edit-user.component";
 import {UsersTableComponent} from "./components/tables/users-table/users-table.component";
 import {LandingComponent} from "./pages/landing/landing.component";
+import {CompetitionResolverService} from "./core/resolvers/competition-resolver.service";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -50,6 +51,8 @@ export const routes: Routes = [
         ],
       canActivate: [authGuard,adminGuard]
     },
-    { path: "landing" , component:LandingComponent},
+    { path: "landing" , component:LandingComponent,
+      resolve:{competitions: CompetitionResolverService}
+    },
     { path: '**', component: NotFoundComponent },
 ];
