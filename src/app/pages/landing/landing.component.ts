@@ -5,7 +5,6 @@ import {Competition} from "../../core/interfaces/competition";
 import {CompetitionService} from "../../core/services/competition.service";
 import {ActivatedRoute} from "@angular/router";
 import {Page} from "../../core/interfaces/page";
-import {User} from "../../core/interfaces/user";
 
 @Component({
   selector: 'app-landing',
@@ -30,8 +29,16 @@ export class LandingComponent implements OnInit{
   }
 
   ngOnInit() {
-    const resolvedData: Page<Competition> = this.route.snapshot.data['competitions'];
-    this.updatePageData(resolvedData);
+    console.log('Component initializing');
+    this.route.data.subscribe({
+      next: (data) => {
+        console.log('Resolver data:', data);
+        if (data['competitions']) {
+          this.updatePageData(data['competitions']);
+        }
+      },
+      error: (err) => console.error('Resolver error:', err)
+    });
   }
 
   private updatePageData(data: Page<Competition>): void {
