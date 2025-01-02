@@ -1,2 +1,36 @@
-<app-index-navbar></app-index-navbar>
-<p>landing works!</p>
+<header class="bg-white dark:bg-gray-900">
+  <app-index-navbar></app-index-navbar>
+  <div class="lg:flex h-screen">
+    <div class="flex items-center justify-center my-auto w-full px-6 py-8 lg:h-[32rem] lg:w-1/2">
+      <div class="max-w-2xl">
+        <h2 class=" font-semibold text-black dark:text-white lg:text-5xl"> Welcome Back, <span class="text-yellow-700 ">Champion! 🏹</span></h2>
+        <p class="mt-4 text-sm text-black dark:text-gray-400 lg:text-2xl">Here’s What Awaits You:</p>
+        <div class="flex flex-col gap-6 mt-8">
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2">🏹 Compete in Thrilling Challenges  : </span>
+            <span > Test your skills in dynamic hunting competitions, tailored for the boldest hunters.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2"> 🐾 Explore Rich Hunting Grounds :</span>
+            <span > Discover diverse terrains and species designed to push your abilities to the next level.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2 "> 🏆 Climb the Leaderboards :</span>
+            <span > Track your progress, earn rewards, and showcase your mastery to the League.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2"> 🌿 Connect with Fellow Hunters:</span>
+            <span > Share your adventures, strategies, and achievements with a passionate community.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full h-64 lg:w-1/2 lg:h-auto">
+      <div class="w-full h-full bg-cover" style="background-image: url('../../../assets/images/landing.webp')">
+        <div class="w-full h-full bg-black opacity-25"></div>
+      </div>
+    </div>
+  </div>
+</header>
+<app-competitions/>
