@@ -18,7 +18,7 @@ export class CompetitionService {
   }
 
   getCompetitionDetails(id: string): Observable<Competition> {
-    return this.http.get<Competition>(`${this.apiUrl}/competition/${id}`);
+    return this.http.get<Competition>(`${this.apiUrl}/competition/details/${id}`);
   }
 
 }

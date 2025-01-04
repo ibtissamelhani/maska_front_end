@@ -6,5 +6,6 @@ export interface Competition {
   speciesType: string;
   minParticipants: number;
   maxParticipants: number;
-  openRegistration: boolean
+  openRegistration: boolean;
+  numberOfParticipants?: number;
 }

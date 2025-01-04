@@ -1,29 +1,34 @@
 <app-index-navbar/>
 <section class="text-gray-600 body-font overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
+    <button routerLink="/landing" title="left arrow" class="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 hover:bg-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="assets/images/f.jpg">
+      <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" [src]="'assets/images/' + getSpeciesImage(competition?.speciesType)">
       <div class="lg:w-1/2 w-full  lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>
+        <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ competition?.speciesType }}</h2>
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ competition?.code }}</h1>
         <div class="flex mb-4">
           <span class="flex items-center">
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-green-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-green-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-green-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-green-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-500" viewBox="0 0 24 24">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-green-500" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
             </svg>
-            <span class="text-gray-600 ml-3">4 Reviews</span>
+            <span class="text-gray-600 ml-3">participations</span>
           </span>
           <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
             <a class="text-gray-500">
@@ -43,33 +48,20 @@
             </a>
           </span>
         </div>
-        <p class="leading-relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</p>
-        <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-          <div class="flex">
-            <span class="mr-3">Color</span>
-            <button class="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-            <button class="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-            <button class="border-2 border-gray-300 ml-1 bg-blue-500 rounded-full w-6 h-6 focus:outline-none"></button>
-          </div>
-          <div class="flex ml-6 items-center">
-            <span class="mr-3">Size</span>
-            <div class="relative">
-              <select class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-base pl-3 pr-10">
-                <option>SM</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-              </select>
-              <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
-                  <path d="M6 9l6 6 6-6"></path>
-                </svg>
-              </span>
-            </div>
-          </div>
+        <p class="leading-relaxed">Get ready for an exciting hunting challenge! This competition is open to hunters of all levels, offering an opportunity to showcase your skills, face thrilling challenges, and connect with fellow hunters.</p>
+        <div class="flex flex-col mt-6 pb-5 border-b-2 border-gray-100 mb-5">
+          <p class="font-bold">📋 Rules and Guidelines:</p>
+          <span>- Respect all safety measures and local regulations.</span>
+          <span>- Use approved equipment only.</span>
+          <span>- Adhere to the competition’s ethical hunting standards.</span>
+        </div>
+        <div class="flex flex-col gap-4 mt-6 pb-5 border-b-2 border-gray-100 mb-5">
+        <p><strong>Location:</strong> {{ competition?.location }}</p>
+        <p><strong>Date:</strong> {{ competition?.date | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Participants:</strong> {{ competition?.minParticipants || 'N/A' }} min /  {{ competition?.maxParticipants }} max</p>
+        <p><strong>Registration Open:</strong> {{ competition?.openRegistration ? 'Yes' : 'No' }}</p>
         </div>
         <div class="flex">
-          <span class="title-font font-medium text-2xl text-gray-900">$58.00</span>
           <button class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">participate</button>
         </div>
       </div>
