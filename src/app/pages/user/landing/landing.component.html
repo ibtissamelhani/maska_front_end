@@ -1,0 +1,82 @@
+<app-index-navbar></app-index-navbar>
+<header class="bg-white dark:bg-gray-900">
+  <div class="lg:flex h-screen">
+    <div class="flex items-center justify-center my-auto w-full px-6 py-8 lg:h-[32rem] lg:w-1/2">
+      <div class="max-w-2xl">
+        <h2 class=" font-semibold text-black dark:text-white lg:text-5xl"> Welcome Back, <span class="text-yellow-700 ">Champion! 🏹</span></h2>
+        <p class="mt-4 text-sm text-black dark:text-gray-400 lg:text-2xl">Here’s What Awaits You:</p>
+        <div class="flex flex-col gap-6 mt-8">
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2">🏹 Compete in Thrilling Challenges  : </span>
+            <span > Test your skills in dynamic hunting competitions, tailored for the boldest hunters.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2"> 🐾 Explore Rich Hunting Grounds :</span>
+            <span > Discover diverse terrains and species designed to push your abilities to the next level.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2 "> 🏆 Climb the Leaderboards :</span>
+            <span > Track your progress, earn rewards, and showcase your mastery to the League.</span>
+          </div>
+          <div class="text-black text-xl">
+            <span class="font-semibold mr-2"> 🌿 Connect with Fellow Hunters:</span>
+            <span > Share your adventures, strategies, and achievements with a passionate community.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full h-64 lg:w-1/2 lg:h-auto">
+      <div class="w-full h-full bg-cover" style="background-image: url('../../../../assets/images/landing.webp')">
+        <div class="w-full h-full bg-black opacity-25"></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="text-gray-600 body-font">
+  <div class="container px-10 py-24 mx-auto">
+    <div class="flex flex-wrap w-full mb-20">
+      <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">New Competitions Await! </h1>
+        <div class="h-1 w-20 bg-green-700 rounded"></div>
+      </div>
+      <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">We’re excited to announce new competitions that you can join today. Whether you’re a beginner or an experienced hunter, there’s a competition for everyone.Don’t miss out on the chance to test your skills and earn amazing rewards.</p>
+    </div>
+    <div  class="flex flex-wrap -m-4">
+      <div *ngFor="let competition of competitions" class="xl:w-1/4 md:w-1/2 p-4">
+        <div class="bg-gray-100 p-6 rounded-lg hover:shadow-lg">
+          <img class="h-40 rounded w-full object-cover object-center mb-6" [src]="'assets/images/' + getSpeciesImage(competition.speciesType)"  alt="content">
+          <h3 class="tracking-widest text-green-700 text-s font-medium title-font">{{ competition.speciesType }}</h3>
+          <a [routerLink]="['/details', competition.id]" class="text-lg text-gray-900 font-medium title-font mb-4 hover:text-gray-800">{{ competition.code }}</a>
+          <p class="leading-relaxed text-base">{{ competition.date | date: 'yyyy-MM-dd'  }} , {{ competition.location }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between mt-6">
+      <button (click)="onPreviousPage()" [disabled]="currentPage === 0" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+        </svg>
+
+        <span>
+                previous
+            </span>
+      </button>
+
+      <div class="items-center hidden lg:flex gap-x-3">
+        <a href="#" class="px-2 py-1 text-sm text-green-500 rounded-md dark:bg-gray-800 bg-green-100/60">Page {{ currentPage + 1 }} of {{ totalPages }}</a>
+      </div>
+
+      <button (click)="onNextPage()" [disabled]="currentPage + 1 >= totalPages" class="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
+            <span>
+                Next
+            </span>
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 rtl:-scale-x-100">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+

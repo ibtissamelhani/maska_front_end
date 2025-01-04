@@ -111,4 +111,9 @@ export class UsersTableComponent  implements OnInit{
         }
       });
   }
+
+  getInitials(username: string): string {
+    return username.split(' ').map(word => word[0].toUpperCase()).slice(0, 2).join('');
+  }
+
 }

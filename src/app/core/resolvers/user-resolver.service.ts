@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Page} from "../../interfaces/page";
-import {User} from "../../interfaces/user";
-import {UserService} from "../../services/user.service";
+import {Page} from "../interfaces/page";
+import {User} from "../interfaces/user";
+import {UserService} from "../services/user.service";
 import {Observable} from "rxjs";
 import {Resolve} from "@angular/router";
 
