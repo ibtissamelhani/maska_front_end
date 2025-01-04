@@ -62,7 +62,12 @@
         <p><strong>Registration Open:</strong> {{ competition?.openRegistration ? 'Yes' : 'No' }}</p>
         </div>
         <div class="flex">
-          <button class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">participate</button>
+          <button
+            [disabled]="isLoading"
+            (click)="participate()"
+            class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
+            participate
+          </button>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ export class CompetitionService {
   constructor(private http: HttpClient) { }
 
   getPaginatedCompetitions(page: number, size: number): Observable<Page<Competition>> {
-    return this.http.get<Page<Competition>>(`${this.apiUrl}/competition?page=${page}&size=${size}`)
+    return this.http.get<Page<Competition>>(`${this.apiUrl}/competition/open?page=${page}&size=${size}`)
   }
 
   getCompetitionDetails(id: string): Observable<Competition> {
