@@ -1,24 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {IndexNavbarComponent} from "../../../components/navbars/index-navbar/index-navbar.component";
-import {CommonModule, NgForOf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
+import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-competition-table',
   standalone: true,
   imports: [
-    IndexNavbarComponent,
-    CommonModule,
     NgForOf,
-    RouterLink,
+    DatePipe,
+    CommonModule
   ],
-  templateUrl: './landing.component.html',
-  styles: ``
+  templateUrl: './competition-table.component.html',
 })
-export class LandingComponent implements OnInit{
+export class CompetitionTableComponent implements OnInit{
 
   competitions: Competition[] = [];
   totalElements = 0;
@@ -28,7 +25,6 @@ export class LandingComponent implements OnInit{
 
   constructor(private competitionService: CompetitionService,private route: ActivatedRoute ) {
   }
-
   ngOnInit() {
     console.log('Component initializing');
     this.route.data.subscribe({
@@ -62,24 +58,10 @@ export class LandingComponent implements OnInit{
       this.fetchCompetition();
     }
   }
-
   private fetchCompetition(): void {
     this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
       this.updatePageData(data);
     });
-  }
-
-  getSpeciesImage(speciesType: string): string {
-    switch (speciesType) {
-      case 'BIG_GAME':
-        return 'big.webp';
-      case 'SEA':
-        return 'sea.webp';
-      case 'BIRD':
-        return 'bird.webp';
-      default:
-        return 'f.jpg';
-    }
   }
 
 }
