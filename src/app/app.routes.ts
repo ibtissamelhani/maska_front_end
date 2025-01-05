@@ -16,6 +16,8 @@ import {UsersTableComponent} from "./components/tables/users-table/users-table.c
 import {LandingComponent} from "./pages/user/landing/landing.component";
 import {competitionResolver} from "./core/resolvers/competition.resolver";
 import {CompetitionDetailsComponent} from "./pages/user/competition-details/competition-details.component";
+import {CompetitionComponent} from "./pages/admin/competition/competition.component";
+import {CompetitionTableComponent} from "./components/tables/competition-table/competition-table.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -47,6 +49,16 @@ export const routes: Routes = [
                 resolve:{ users: UserResolverService }
               },
               { path: 'editUser', component: EditUserComponent}
+            ]
+          },
+          {
+            path: "competition", component: CompetitionComponent,
+            children: [
+              {
+                path: '',
+                component: CompetitionTableComponent,
+                resolve: {competitions: competitionResolver}
+              }
             ]
           },
         ],

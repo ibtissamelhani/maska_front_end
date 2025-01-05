@@ -57,12 +57,17 @@
         </div>
         <div class="flex flex-col gap-4 mt-6 pb-5 border-b-2 border-gray-100 mb-5">
         <p><strong>Location:</strong> {{ competition?.location }}</p>
-        <p><strong>Date:</strong> {{ competition?.date | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Date:</strong> {{ competition?.date | date: 'EEEE, MMMM d, yyyy' }}</p>
         <p><strong>Participants:</strong> {{ competition?.minParticipants || 'N/A' }} min /  {{ competition?.maxParticipants }} max</p>
         <p><strong>Registration Open:</strong> {{ competition?.openRegistration ? 'Yes' : 'No' }}</p>
         </div>
         <div class="flex">
-          <button class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">participate</button>
+          <button
+            [disabled]="isLoading"
+            (click)="participate()"
+            class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
+            participate
+          </button>
         </div>
       </div>
     </div>
