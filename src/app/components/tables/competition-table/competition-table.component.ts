@@ -58,10 +58,26 @@ export class CompetitionTableComponent implements OnInit{
       this.fetchCompetition();
     }
   }
+
   private fetchCompetition(): void {
     this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
       this.updatePageData(data);
     });
+  }
+
+  deleteCompetition(competitionId: string): void {
+    if (confirm('Are you sure you want to delete this competition?')) {
+      this.competitionService.deleteCompetition(competitionId).subscribe({
+        next: () => {
+          alert('User deleted successfully');
+          this.fetchCompetition();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete competition');
+        },
+      });
+    }
   }
 
 }
