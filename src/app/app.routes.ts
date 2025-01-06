@@ -12,14 +12,13 @@ import {NotFoundComponent} from "./pages/error/not-found/not-found.component";
 import {UserComponent} from "./admin/User/users/user.component";
 import {UserResolverService} from "./core/resolvers/user-resolver.service";
 import {EditUserComponent} from "./admin/User/edit-user/edit-user.component";
-import {UsersTableComponent} from "./components/tables/users-table/users-table.component";
 import {LandingComponent} from "./member/landing/landing.component";
 import {competitionResolver} from "./core/resolvers/competition.resolver";
 import {CompetitionDetailsComponent} from "./member/competition-details/competition-details.component";
 import {CompetitionComponent} from "./admin/Competition/competitions/competition.component";
-import {CompetitionTableComponent} from "./components/tables/competitions-table/competitions-table.component";
 import {publicPagesGuard} from "./core/guards/public-pages.guard";
 import {EditCompetitionComponent} from "./admin/Competition/edit-competition/edit-competition.component";
+import {UsersLayoutComponent} from "./admin/User/users-layout/users-layout.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -44,24 +43,16 @@ export const routes: Routes = [
             component: DashboardComponent
           },
           {
-            path: 'users', component: UserComponent,
+            path: 'users', component: UsersLayoutComponent,
             children: [
-              {
-                path: '',
-                component: UsersTableComponent,
-                resolve:{ users: UserResolverService }
-              },
+              { path: '', component: UserComponent, resolve:{ users: UserResolverService },},
               { path: 'editUser', component: EditUserComponent}
-            ]
+            ],
           },
           {
             path: "competition", component: CompetitionComponent,
+            resolve: {competitions: competitionResolver},
             children: [
-              {
-                path: '',
-                component: CompetitionTableComponent,
-                resolve: {competitions: competitionResolver}
-              },
               {
                 path: "edit",
                 component: EditCompetitionComponent
