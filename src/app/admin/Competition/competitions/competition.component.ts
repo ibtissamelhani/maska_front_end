@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
 import {Page} from "../../../core/interfaces/page";
@@ -8,12 +8,13 @@ import {Page} from "../../../core/interfaces/page";
 @Component({
   selector: 'app-competitions',
   standalone: true,
-  imports: [
-    DatePipe,
-    NgForOf,
-    NgIf,
-    RouterLink
-  ],
+    imports: [
+        DatePipe,
+        NgForOf,
+        NgIf,
+        RouterLink,
+        JsonPipe
+    ],
   templateUrl: './competition.component.html',
 })
 export class CompetitionComponent implements OnInit {

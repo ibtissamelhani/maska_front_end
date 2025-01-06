@@ -56,9 +56,10 @@ export const routes: Routes = [
               {
                 path: '',
                 component: CompetitionComponent,
-                resolve: {competitions: competitionResolver}},
+                resolve: {competitions: competitionResolver}
+              },
               {
-                path: "edit",
+                path: 'edit/:id',
                 component: EditCompetitionComponent
               }
             ]
