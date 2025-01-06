@@ -18,9 +18,11 @@ import {competitionResolver} from "./core/resolvers/competition.resolver";
 import {CompetitionDetailsComponent} from "./pages/user/competition-details/competition-details.component";
 import {CompetitionComponent} from "./pages/admin/competition/competition.component";
 import {CompetitionTableComponent} from "./components/tables/competition-table/competition-table.component";
+import {publicPagesGuard} from "./core/guards/public-pages.guard";
+import {EditCompetitionComponent} from "./components/forms/edit-competition/edit-competition.component";
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent},
+    { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
     { path: 'forbidden', component: ForbiddenComponent },
     { path: 'auth', component: AuthComponent,
         children: [
@@ -32,7 +34,8 @@ export const routes: Routes = [
                 path: "login",
                 component: LoginComponent,
             }
-        ]
+        ],
+      canActivate: [publicPagesGuard]
     },
     {   path : 'admin', component: AdminComponent,
         children:[
@@ -58,6 +61,10 @@ export const routes: Routes = [
                 path: '',
                 component: CompetitionTableComponent,
                 resolve: {competitions: competitionResolver}
+              },
+              {
+                path: "edit",
+                component: EditCompetitionComponent
               }
             ]
           },
@@ -69,11 +76,13 @@ export const routes: Routes = [
       component:LandingComponent,
       resolve: {
         competitions: competitionResolver
-      }
+      },
+      canActivate: [authGuard]
     },
     {
       path: "details/:id",
-      component: CompetitionDetailsComponent
+      component: CompetitionDetailsComponent,
+      canActivate: [authGuard]
     },
     { path: '**', component: NotFoundComponent },
 ];

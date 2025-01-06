@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 
@@ -11,7 +11,8 @@ import {CommonModule, DatePipe, NgForOf} from "@angular/common";
   imports: [
     NgForOf,
     DatePipe,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './competition-table.component.html',
 })
@@ -58,10 +59,26 @@ export class CompetitionTableComponent implements OnInit{
       this.fetchCompetition();
     }
   }
+
   private fetchCompetition(): void {
     this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
       this.updatePageData(data);
     });
+  }
+
+  deleteCompetition(competitionId: string): void {
+    if (confirm('Are you sure you want to delete this competition?')) {
+      this.competitionService.deleteCompetition(competitionId).subscribe({
+        next: () => {
+          alert('Competition deleted successfully');
+          this.fetchCompetition();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete competition');
+        },
+      });
+    }
   }
 
 }

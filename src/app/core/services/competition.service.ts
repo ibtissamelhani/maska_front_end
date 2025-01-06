@@ -21,4 +21,8 @@ export class CompetitionService {
     return this.http.get<Competition>(`${this.apiUrl}/competition/details/${id}`);
   }
 
+  deleteCompetition(id: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/competition/delete/${id}`);
+  }
+
 }
