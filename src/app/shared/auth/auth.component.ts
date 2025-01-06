@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthNavbarComponent } from "../../components/navbars/auth-navbar/auth-navbar.component";
+import { AuthNavbarComponent } from "../navbars/auth-navbar/auth-navbar.component";
 import { RouterOutlet } from '@angular/router';
 
 @Component({

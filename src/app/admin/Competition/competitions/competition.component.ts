@@ -1,23 +1,22 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
-import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 
 @Component({
-  selector: 'app-competition-table',
+  selector: 'app-competitions',
   standalone: true,
   imports: [
-    NgForOf,
     DatePipe,
-    CommonModule,
+    NgForOf,
+    NgIf,
     RouterLink
   ],
-  templateUrl: './competition-table.component.html',
+  templateUrl: './competition.component.html',
 })
-export class CompetitionTableComponent implements OnInit{
-
+export class CompetitionComponent implements OnInit {
   competitions: Competition[] = [];
   totalElements = 0;
   totalPages = 0;
@@ -67,7 +66,7 @@ export class CompetitionTableComponent implements OnInit{
   }
 
   deleteCompetition(competitionId: string): void {
-    if (confirm('Are you sure you want to delete this competition?')) {
+    if (confirm('Are you sure you want to delete this competitions?')) {
       this.competitionService.deleteCompetition(competitionId).subscribe({
         next: () => {
           alert('Competition deleted successfully');
@@ -75,10 +74,9 @@ export class CompetitionTableComponent implements OnInit{
         },
         error: (err) => {
           console.error(err);
-          alert('Failed to delete competition');
+          alert('Failed to delete competitions');
         },
       });
     }
   }
-
 }

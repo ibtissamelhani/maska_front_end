@@ -1,27 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule, DatePipe, NgForOf} from "@angular/common";
-import {User} from "../../../core/interfaces/user";
 import {ActivatedRoute, RouterLink} from "@angular/router";
+import {CommonModule, DatePipe, NgForOf, NgIf} from "@angular/common";
+import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {User} from "../../../core/interfaces/user";
 import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/interfaces/page";
-import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {SearchUser} from "../../../core/interfaces/search-user";
 
+
 @Component({
-  selector: 'app-users-table',
+  selector: 'app-users',
   standalone: true,
   imports: [
     CommonModule,
     DatePipe,
     NgForOf,
-    RouterLink,
-    ReactiveFormsModule
+    NgIf,
+    ReactiveFormsModule,
+    RouterLink
   ],
-  templateUrl: './users-table.component.html',
+  templateUrl: './user.component.html',
+  styles: ``
 })
-export class UsersTableComponent  implements OnInit{
-
+export class UserComponent implements OnInit{
   isLoading = false;
   searchForm: FormGroup;
   users: User[] = [];
@@ -83,7 +85,7 @@ export class UsersTableComponent  implements OnInit{
   }
 
   deleteUser(userId: string): void {
-    if (confirm('Are you sure you want to delete this user?')) {
+    if (confirm('Are you sure you want to delete this users?')) {
       this.userService.deleteUser(userId).subscribe({
         next: () => {
           alert('User deleted successfully');
@@ -91,7 +93,7 @@ export class UsersTableComponent  implements OnInit{
         },
         error: (err) => {
           console.error(err);
-          alert('Failed to delete user');
+          alert('Failed to delete users');
         },
       });
     }

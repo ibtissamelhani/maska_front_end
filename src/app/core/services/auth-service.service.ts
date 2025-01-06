@@ -29,7 +29,7 @@ export class AuthServiceService {
     }),
     catchError((error: any) => {
       console.error('Login error:', error); // Log the error
-      return throwError(() => new Error('Login failed. Please try again.')); // Return a user-friendly error
+      return throwError(() => new Error('Login failed. Please try again.')); // Return a users-friendly error
 
       })
     );
@@ -50,7 +50,7 @@ export class AuthServiceService {
     }),
     catchError((error: any) => {
       console.error('register error:', error); // Log the error
-      return throwError(() => new Error('register failed. Please try again.')); // Return a user-friendly error
+      return throwError(() => new Error('register failed. Please try again.')); // Return a users-friendly error
 
       })
     );

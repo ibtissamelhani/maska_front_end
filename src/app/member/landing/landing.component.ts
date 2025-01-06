@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {IndexNavbarComponent} from "../../../components/navbars/index-navbar/index-navbar.component";
+import {IndexNavbarComponent} from "../../shared/navbars/index-navbar/index-navbar.component";
 import {CommonModule, NgForOf} from "@angular/common";
-import {Competition} from "../../../core/interfaces/competition";
-import {CompetitionService} from "../../../core/services/competition.service";
+import {Competition} from "../../core/interfaces/competition";
+import {CompetitionService} from "../../core/services/competition.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {Page} from "../../../core/interfaces/page";
+import {Page} from "../../core/interfaces/page";
 
 @Component({
   selector: 'app-landing',

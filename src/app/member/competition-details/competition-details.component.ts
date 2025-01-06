@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IndexNavbarComponent} from "../../../components/navbars/index-navbar/index-navbar.component";
-import {Competition} from "../../../core/interfaces/competition";
+import {IndexNavbarComponent} from "../../shared/navbars/index-navbar/index-navbar.component";
+import {Competition} from "../../core/interfaces/competition";
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {CompetitionService} from "../../../core/services/competition.service";
+import {CompetitionService} from "../../core/services/competition.service";
 import {DatePipe} from "@angular/common";
-import {ParticipationService} from "../../../core/services/participation.service";
-import {ParticipationRequest} from "../../../core/interfaces/participation";
+import {ParticipationService} from "../../core/services/participation.service";
+import {ParticipationRequest} from "../../core/interfaces/participation";
 
 @Component({
-  selector: 'app-competition-details',
+  selector: 'app-competitions-details',
   standalone: true,
   imports: [
     IndexNavbarComponent,
@@ -41,7 +41,7 @@ export class CompetitionDetailsComponent implements OnInit{
         this.competition = data;
       },
       error: (err) => {
-        console.error('Error fetching competition details:', err);
+        console.error('Error fetching competitions details:', err);
       }
     });
   }
@@ -66,10 +66,10 @@ export class CompetitionDetailsComponent implements OnInit{
     this.participationService.registerUserToCompetition(this.competitionId)
       .subscribe({
         next: (response) => {
-          console.log('Successfully registered to competition');
+          console.log('Successfully registered to competitions');
         },
         error: (error) => {
-          console.error('Error registering to competition:', error);
+          console.error('Error registering to competitions:', error);
         },
         complete: () => {
           this.isLoading = true;

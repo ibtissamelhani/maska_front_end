@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'app-edit-user',
+  selector: 'app-edit-users',
   standalone: true,
   imports: [
     RouterLink

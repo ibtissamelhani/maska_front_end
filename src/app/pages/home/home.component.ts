@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IndexNavbarComponent } from "../../components/navbars/index-navbar/index-navbar.component";
-import { AuthNavbarComponent } from "../../components/navbars/auth-navbar/auth-navbar.component";
+import { IndexNavbarComponent } from "../../shared/navbars/index-navbar/index-navbar.component";
+import { AuthNavbarComponent } from "../../shared/navbars/auth-navbar/auth-navbar.component";
 import { RouterLink } from '@angular/router';
 
 @Component({
