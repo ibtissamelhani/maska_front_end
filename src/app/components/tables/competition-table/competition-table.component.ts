@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {CommonModule, DatePipe, NgForOf} from "@angular/common";
 
@@ -11,7 +11,8 @@ import {CommonModule, DatePipe, NgForOf} from "@angular/common";
   imports: [
     NgForOf,
     DatePipe,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './competition-table.component.html',
 })
