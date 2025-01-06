@@ -69,7 +69,7 @@ export class CompetitionTableComponent implements OnInit{
     if (confirm('Are you sure you want to delete this competition?')) {
       this.competitionService.deleteCompetition(competitionId).subscribe({
         next: () => {
-          alert('User deleted successfully');
+          alert('Competition deleted successfully');
           this.fetchCompetition();
         },
         error: (err) => {

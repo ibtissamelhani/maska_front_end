@@ -22,7 +22,7 @@ export class CompetitionService {
   }
 
   deleteCompetition(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/competitions/delete/${id}`);
+    return this.http.delete<string>(`${this.apiUrl}/competition/delete/${id}`);
   }
 
 }
