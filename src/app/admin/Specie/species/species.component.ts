@@ -3,11 +3,15 @@ import {SpeciesService} from "../../../core/services/species.service";
 import {ActivatedRoute} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {Species} from "../../../core/interfaces/species";
+import {NgClass, NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-species',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgClass
+  ],
   templateUrl: './species.component.html',
 })
 export class SpeciesComponent implements OnInit{
@@ -15,7 +19,7 @@ export class SpeciesComponent implements OnInit{
   totalElements = 0;
   totalPages = 0;
   currentPage = 0;
-  pageSize = 12;
+  pageSize = 8;
 
 
   constructor(private specieService: SpeciesService, private route: ActivatedRoute) {

@@ -1,7 +1,7 @@
 <div class="flex items-center gap-x-3">
   <h2 class="text-lg font-medium text-gray-800 dark:text-white">Species</h2>
 
-  <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">100 species</span>
+  <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{{ species.length * totalPages }} species</span>
 </div>
 
 <div class="flex flex-col mt-6">
@@ -50,32 +50,41 @@
           </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-          <tr>
+          <tr *ngFor="let specie of species">
             <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
               <div class="inline-flex items-center gap-x-3">
                 <input type="checkbox" class="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700">
 
                 <div class="flex items-center gap-x-2">
                   <div>
-                    <h2 class="font-medium text-gray-800 dark:text-white ">Arthur Melo</h2>
+                    <h2 class="font-medium text-gray-800 dark:text-white ">{{ specie.name }}</h2>
                   </div>
                 </div>
               </div>
             </td>
             <td class="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-              <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                <h2 class="text-sm font-normal text-emerald-500">Active</h2>
+              <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 "
+                   [ngClass]="{
+                      'bg-emerald-100/60 text-emerald-500': specie.category === 'SEA',
+                      'bg-blue-100/60 text-blue-500': specie.category === 'BIG_GAME',
+                      'bg-yellow-100/60 text-yellow-500': specie.category === 'BIRD'
+                    }">
+                <h2 class="text-sm font-normal">{{ specie.category }}</h2>
               </div>
             </td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">Design Director</td>
-            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">authurmeloexample.com</td>
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ specie.minimumWeight }}</td>
             <td class="px-4 py-4 text-sm whitespace-nowrap">
-              <div class="flex items-center gap-x-2">
-                <p class="px-3 py-1 text-xs text-indigo-500 rounded-full dark:bg-gray-800 bg-indigo-100/60">Design</p>
-                <p class="px-3 py-1 text-xs text-blue-500 rounded-full dark:bg-gray-800 bg-blue-100/60">Product</p>
-                <p class="px-3 py-1 text-xs text-pink-500 rounded-full dark:bg-gray-800 bg-pink-100/60">Marketing</p>
+              <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 "
+                   [ngClass]="{
+                      'bg-green-200/60 text-green-500': specie.difficulty === 'COMMON',
+                      'bg-orange-200/60 text-orange-500': specie.difficulty === 'RARE',
+                      'bg-red-200/60 text-red-500': specie.difficulty === 'EPIC',
+                      'bg-gray-200/60 text-gray-600': specie.difficulty === 'LEGENDARY'
+                    }">
+                <h2 class="text-sm font-normal">{{ specie.difficulty }}</h2>
               </div>
             </td>
+            <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ specie.points}}</td>
             <td class="px-4 py-4 text-sm whitespace-nowrap">
               <div class="flex items-center gap-x-6">
                 <button class="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">

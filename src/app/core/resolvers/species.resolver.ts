@@ -9,7 +9,7 @@ export const speciesResolver: ResolveFn<Page<Species>> = (route, state) => {
 
   const speciesService = inject(SpeciesService);
 
-  return speciesService.getPaginatedSpecies(0, 12).pipe(
+  return speciesService.getPaginatedSpecies(0, 8).pipe(
     catchError(error => {
       console.error('Resolver error:', error);
       return of({
@@ -17,7 +17,7 @@ export const speciesResolver: ResolveFn<Page<Species>> = (route, state) => {
         totalElements: 0,
         totalPages: 0,
         number: 0,
-        size: 12
+        size: 8
       } as Page<Species>);
     })
   );
