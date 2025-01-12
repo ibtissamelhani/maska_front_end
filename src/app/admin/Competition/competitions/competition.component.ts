@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterOutlet} from "@angular/router";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
 import {Page} from "../../../core/interfaces/page";
@@ -8,12 +8,13 @@ import {Page} from "../../../core/interfaces/page";
 @Component({
   selector: 'app-competitions',
   standalone: true,
-  imports: [
-    DatePipe,
-    NgForOf,
-    NgIf,
-    RouterLink
-  ],
+    imports: [
+        DatePipe,
+        NgForOf,
+        NgIf,
+        RouterLink,
+        JsonPipe
+    ],
   templateUrl: './competition.component.html',
 })
 export class CompetitionComponent implements OnInit {
@@ -27,15 +28,8 @@ export class CompetitionComponent implements OnInit {
   }
   ngOnInit() {
     console.log('Component initializing');
-    this.route.data.subscribe({
-      next: (data) => {
-        console.log('Resolver data:', data);
-        if (data['competitions']) {
-          this.updatePageData(data['competitions']);
-        }
-      },
-      error: (err) => console.error('Resolver error:', err)
-    });
+    const resolvedData: Page<Competition> = this.route.snapshot.data['competitions'];
+    this.updatePageData(resolvedData);
   }
 
   private updatePageData(data: Page<Competition>): void {

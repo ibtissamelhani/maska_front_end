@@ -7,6 +7,7 @@ import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/interfaces/page";
 import {debounceTime, distinctUntilChanged} from "rxjs";
 import {SearchUser} from "../../../core/interfaces/search-user";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -77,10 +78,21 @@ export class UserComponent implements OnInit{
     }
   }
 
-  // Fetch users dynamically for the current page
   private fetchUsers(): void {
-    this.userService.getPaginatedUsers(this.currentPage, this.pageSize).subscribe((data: Page<User>) => {
-      this.updatePageData(data);
+    this.userService.getPaginatedUsers(this.currentPage, this.pageSize).subscribe({
+      next: (data: Page<User>) => {
+        // Ce bloc est exécuté lorsque des données sont reçues avec succès.
+        this.updatePageData(data);
+        console.log('Données reçues :', data);
+      },
+        error: (err: any) => {
+        // Ce bloc est exécuté si une erreur survient lors de la requête.
+        console.error('Erreur lors de la récupération des utilisateurs :', err);
+      },
+        complete: () => {
+        // Ce bloc est exécuté lorsque l'observable a terminé son émission.
+        console.log('Récupération des utilisateurs terminée.');
+      },
     });
   }
 
