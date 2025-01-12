@@ -41,7 +41,7 @@ export class EditCompetitionComponent implements OnInit{
     this.competitionService.getCompetitionDetails(id).subscribe(competition => {
       this.competitionForm.patchValue({
         location: competition.location,
-        date: this.formatDateForInput(competition.date),
+        date: competition.date,
         minParticipants: competition.minParticipants,
         maxParticipants: competition.maxParticipants,
         speciesType: competition.speciesType,
