@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {API_BASE_URL} from "../constants/constants";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {catchError, Observable, throwError} from "rxjs";
 import {Page} from "../interfaces/page";
 import {Competition} from "../interfaces/competition";
 
@@ -23,6 +23,10 @@ export class CompetitionService {
 
   deleteCompetition(id: string): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/competition/delete/${id}`);
+  }
+
+  updateCompetition(id: string, competition: Competition): Observable<Competition> {
+    return this.http.put<Competition>(`${this.apiUrl}/competition/${id}`, competition);
   }
 
 }

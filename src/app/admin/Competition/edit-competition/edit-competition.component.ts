@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
 import {ParticipationService} from "../../../core/services/participation.service";
@@ -23,7 +23,8 @@ export class EditCompetitionComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private competitionService: CompetitionService
+    private competitionService: CompetitionService,
+    private router: Router
   ) {
     this.competitionForm = this.fb.group({
       location: ['', Validators.required],
@@ -31,7 +32,7 @@ export class EditCompetitionComponent implements OnInit{
       minParticipants: [0, [Validators.required, Validators.min(0)]],
       maxParticipants: [0, [Validators.required, Validators.min(0)]],
       speciesType: ['', Validators.required],
-      isOpen: [true, Validators.required]
+      openRegistration: [true, Validators.required]
     });
   }
 
@@ -44,7 +45,7 @@ export class EditCompetitionComponent implements OnInit{
         minParticipants: competition.minParticipants,
         maxParticipants: competition.maxParticipants,
         speciesType: competition.speciesType,
-        isOpen: competition.openRegistration
+        openRegistration: competition.openRegistration
       });
     });
   }
@@ -56,6 +57,30 @@ export class EditCompetitionComponent implements OnInit{
       return '';
     }
     return date.toISOString().split('T')[0];
+  }
+
+  onSubmit() {
+    if (this.competitionForm.valid) {
+      this.isLoading = true;
+      const id = this.route.snapshot.params['id'];
+      this.competitionService.updateCompetition(id, this.competitionForm.value)
+        .subscribe({
+          next: () => {
+            alert('Competition updated successfully!');
+            this.isLoading = false;
+            this.router.navigate(['/admin/competition']);
+          },
+          error: (error) => {
+            console.error('Error updating competition:', error);
+            alert('Failed to update competition. Please try again later.');
+            this.isLoading = false;
+          },
+          complete: () => {
+            this.competitionForm.reset();
+            this.isLoading = false;
+          }
+        });
+    }
   }
 
 

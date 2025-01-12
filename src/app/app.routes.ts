@@ -20,6 +20,7 @@ import {publicPagesGuard} from "./core/guards/public-pages.guard";
 import {EditCompetitionComponent} from "./admin/Competition/edit-competition/edit-competition.component";
 import {UsersLayoutComponent} from "./admin/User/users-layout/users-layout.component";
 import {CompetitionLayoutComponent} from "./admin/Competition/competition-layout/competition-layout.component";
+import {CompetitionResolverService} from "./core/resolvers/competition-resolver.service";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -56,7 +57,7 @@ export const routes: Routes = [
               {
                 path: '',
                 component: CompetitionComponent,
-                resolve: {competitions: competitionResolver}
+                resolve: {competitions: CompetitionResolverService}
               },
               {
                 path: 'edit/:id',

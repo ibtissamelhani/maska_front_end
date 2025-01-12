@@ -28,15 +28,8 @@ export class CompetitionComponent implements OnInit {
   }
   ngOnInit() {
     console.log('Component initializing');
-    this.route.data.subscribe({
-      next: (data) => {
-        console.log('Resolver data:', data);
-        if (data['competitions']) {
-          this.updatePageData(data['competitions']);
-        }
-      },
-      error: (err) => console.error('Resolver error:', err)
-    });
+    const resolvedData: Page<Competition> = this.route.snapshot.data['competitions'];
+    this.updatePageData(resolvedData);
   }
 
   private updatePageData(data: Page<Competition>): void {
