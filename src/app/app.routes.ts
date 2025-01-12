@@ -21,6 +21,9 @@ import {EditCompetitionComponent} from "./admin/Competition/edit-competition/edi
 import {UsersLayoutComponent} from "./admin/User/users-layout/users-layout.component";
 import {CompetitionLayoutComponent} from "./admin/Competition/competition-layout/competition-layout.component";
 import {CompetitionResolverService} from "./core/resolvers/competition-resolver.service";
+import {SpeciesLayoutComponent} from "./admin/Specie/species-layout/species-layout.component";
+import {SpeciesComponent} from "./admin/Specie/species/species.component";
+import {speciesResolver} from "./core/resolvers/species.resolver";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -63,6 +66,16 @@ export const routes: Routes = [
                 path: 'edit/:id',
                 component: EditCompetitionComponent
               }
+            ]
+          },
+          {
+            path: "species", component: SpeciesLayoutComponent,
+            children: [
+              {
+                path: '',
+                component: SpeciesComponent,
+                resolve: {species: speciesResolver}
+              },
             ]
           },
         ],
