@@ -3,8 +3,8 @@ import {SpeciesService} from "../../../core/services/species.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {Species} from "../../../core/interfaces/species";
-import {CommonModule, NgClass, NgForOf} from "@angular/common";
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {NgClass, NgForOf} from "@angular/common";
+import {CreateSpeciesComponent} from "../create-species/create-species.component";
 
 @Component({
   selector: 'app-species',
@@ -12,8 +12,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
   imports: [
     NgForOf,
     NgClass,
-    ReactiveFormsModule,
-    CommonModule
+    CreateSpeciesComponent
   ],
   templateUrl: './species.component.html',
 })
@@ -24,24 +23,12 @@ export class SpeciesComponent implements OnInit{
   currentPage = 0;
   pageSize = 8;
 
-  speciesForm: FormGroup;
-  isSubmitting = false;
-  error: string | null = null;
-
 
   constructor(
     private specieService: SpeciesService,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router
   ) {
-    this.speciesForm = this.fb.group({
-      name: ['', Validators.required],
-      minimumWeight: ['', [Validators.min(0)]],
-      points: ['', [Validators.min(0)]],
-      category: ['', Validators.required],
-      difficulty: ['', Validators.required]
-    });
+
   }
 
 
@@ -86,26 +73,21 @@ export class SpeciesComponent implements OnInit{
     });
   }
 
-  onSubmit(): void {
-    if (this.speciesForm.invalid || this.isSubmitting) {
-      return;
+
+
+  deleteUser(specieId: string): void {
+    if (confirm('Are you sure you want to delete this specie?')) {
+      this.specieService.deleteSpecies(specieId).subscribe({
+        next: () => {
+          alert('specie deleted successfully');
+          this.fetchSpecies();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete specie');
+        },
+      });
     }
-
-    this.isSubmitting = true;
-    this.error = null;
-
-    const speciesData = this.speciesForm.value;
-
-    this.specieService.createSpecies(speciesData).subscribe({
-      next: (createdSpecies) => {
-        this.router.navigate(['/admin/species']);
-      },
-      error: (error) => {
-        console.error('Error creating species:', error);
-        this.error = 'Failed to create species. Please try again.';
-        this.isSubmitting = false;
-      }
-    });
   }
 
 }
