@@ -16,4 +16,8 @@ export class SpeciesService {
   getPaginatedSpecies(page: number, size: number): Observable<Page<Species>> {
     return this.http.get<Page<Species>>(`${this.apiUrl}/species?page=${page}&size=${size}`)
   }
+
+  createSpecies(speciesData: Partial<Species>): Observable<Species> {
+    return this.http.post<Species>(`${this.apiUrl}/species`, speciesData);
+  }
 }
