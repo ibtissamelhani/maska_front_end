@@ -22,7 +22,7 @@ export class SpeciesService {
   }
 
   deleteSpecies(specieId: String): Observable<string>{
-    return this.http.delete<string>(`${this.apiUrl}/species/${specieId}`);
+    return this.http.delete<string>(`${this.apiUrl}/species/delete/${specieId}`);
   }
 
 }

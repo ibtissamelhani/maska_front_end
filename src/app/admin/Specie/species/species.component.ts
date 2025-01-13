@@ -75,7 +75,7 @@ export class SpeciesComponent implements OnInit{
 
 
 
-  deleteUser(specieId: string): void {
+  deleteSpecie(specieId: string): void {
     if (confirm('Are you sure you want to delete this specie?')) {
       this.specieService.deleteSpecies(specieId).subscribe({
         next: () => {
