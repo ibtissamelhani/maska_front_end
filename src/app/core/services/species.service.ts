@@ -25,4 +25,12 @@ export class SpeciesService {
     return this.http.delete<string>(`${this.apiUrl}/species/delete/${specieId}`);
   }
 
+  updateSpecies(id: string, speciesData: Partial<Species>): Observable<Species> {
+    return this.http.put<Species>(`${this.apiUrl}/species/${id}`, speciesData);
+  }
+
+  getSpeciesById(id: string): Observable<Species> {
+    return this.http.get<Species>(`${this.apiUrl}/species/${id}`);
+  }
+
 }

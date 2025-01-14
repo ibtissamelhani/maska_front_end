@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SpeciesService} from "../../../core/services/species.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {Species} from "../../../core/interfaces/species";
 import {NgClass, NgForOf} from "@angular/common";
@@ -12,7 +12,8 @@ import {CreateSpeciesComponent} from "../create-species/create-species.component
   imports: [
     NgForOf,
     NgClass,
-    CreateSpeciesComponent
+    CreateSpeciesComponent,
+    RouterLink
   ],
   templateUrl: './species.component.html',
 })
