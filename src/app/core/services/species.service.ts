@@ -16,4 +16,21 @@ export class SpeciesService {
   getPaginatedSpecies(page: number, size: number): Observable<Page<Species>> {
     return this.http.get<Page<Species>>(`${this.apiUrl}/species?page=${page}&size=${size}`)
   }
+
+  createSpecies(speciesData: Partial<Species>): Observable<Species> {
+    return this.http.post<Species>(`${this.apiUrl}/species`, speciesData);
+  }
+
+  deleteSpecies(specieId: String): Observable<string>{
+    return this.http.delete<string>(`${this.apiUrl}/species/delete/${specieId}`);
+  }
+
+  updateSpecies(id: string, speciesData: Partial<Species>): Observable<Species> {
+    return this.http.put<Species>(`${this.apiUrl}/species/${id}`, speciesData);
+  }
+
+  getSpeciesById(id: string): Observable<Species> {
+    return this.http.get<Species>(`${this.apiUrl}/species/${id}`);
+  }
+
 }

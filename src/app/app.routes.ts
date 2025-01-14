@@ -24,6 +24,7 @@ import {CompetitionResolverService} from "./core/resolvers/competition-resolver.
 import {SpeciesLayoutComponent} from "./admin/Specie/species-layout/species-layout.component";
 import {SpeciesComponent} from "./admin/Specie/species/species.component";
 import {speciesResolver} from "./core/resolvers/species.resolver";
+import {UpdateSpeciesComponent} from "./admin/Specie/update-species/update-species.component";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -76,6 +77,10 @@ export const routes: Routes = [
                 component: SpeciesComponent,
                 resolve: {species: speciesResolver}
               },
+              {
+                path: 'edit/:id',
+                component: UpdateSpeciesComponent
+              }
             ]
           },
         ],

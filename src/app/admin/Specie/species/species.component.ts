@@ -1,13 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {SpeciesService} from "../../../core/services/species.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {Page} from "../../../core/interfaces/page";
 import {Species} from "../../../core/interfaces/species";
+import {NgClass, NgForOf} from "@angular/common";
+import {CreateSpeciesComponent} from "../create-species/create-species.component";
 
 @Component({
   selector: 'app-species',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgClass,
+    CreateSpeciesComponent,
+    RouterLink
+  ],
   templateUrl: './species.component.html',
 })
 export class SpeciesComponent implements OnInit{
@@ -15,11 +22,16 @@ export class SpeciesComponent implements OnInit{
   totalElements = 0;
   totalPages = 0;
   currentPage = 0;
-  pageSize = 12;
+  pageSize = 8;
 
 
-  constructor(private specieService: SpeciesService, private route: ActivatedRoute) {
+  constructor(
+    private specieService: SpeciesService,
+    private route: ActivatedRoute,
+  ) {
+
   }
+
 
   ngOnInit() {
     const resolvedData: Page<Species> = this.route.snapshot.data["species"];
@@ -60,6 +72,23 @@ export class SpeciesComponent implements OnInit{
         console.log('Récupération des species terminée.');
       },
     });
+  }
+
+
+
+  deleteSpecie(specieId: string): void {
+    if (confirm('Are you sure you want to delete this specie?')) {
+      this.specieService.deleteSpecies(specieId).subscribe({
+        next: () => {
+          alert('specie deleted successfully');
+          this.fetchSpecies();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to delete specie');
+        },
+      });
+    }
   }
 
 }
