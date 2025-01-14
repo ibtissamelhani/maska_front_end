@@ -31,15 +31,7 @@ export class LandingComponent implements OnInit{
 
   ngOnInit() {
     console.log('Component initializing');
-    this.route.data.subscribe({
-      next: (data) => {
-        console.log('Resolver data:', data);
-        if (data['competitions']) {
-          this.updatePageData(data['competitions']);
-        }
-      },
-      error: (err) => console.error('Resolver error:', err)
-    });
+    this.fetchCompetition();
   }
 
   private updatePageData(data: Page<Competition>): void {

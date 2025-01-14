@@ -4,6 +4,7 @@ import {DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
 import {Page} from "../../../core/interfaces/page";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-competitions',
@@ -23,13 +24,13 @@ export class CompetitionComponent implements OnInit {
   totalPages = 0;
   currentPage = 0;
   pageSize = 12;
+  isLoading = false;
 
   constructor(private competitionService: CompetitionService,private route: ActivatedRoute ) {
   }
   ngOnInit() {
     console.log('Component initializing');
-    const resolvedData: Page<Competition> = this.route.snapshot.data['competitions'];
-    this.updatePageData(resolvedData);
+    this.fetchCompetition()
   }
 
   private updatePageData(data: Page<Competition>): void {
@@ -54,8 +55,15 @@ export class CompetitionComponent implements OnInit {
   }
 
   private fetchCompetition(): void {
-    this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
-      this.updatePageData(data);
+    this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe({
+      next: (data) => {
+        this.updatePageData(data);
+        this.isLoading = false;
+      },
+        error: (err) => {
+        console.error('Error loading competitions:', err);
+        this.isLoading = false;
+      },
     });
   }
 

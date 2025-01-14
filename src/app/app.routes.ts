@@ -61,7 +61,7 @@ export const routes: Routes = [
               {
                 path: '',
                 component: CompetitionComponent,
-                resolve: {competitions: CompetitionResolverService}
+                // resolve: {competitions: CompetitionResolverService}
               },
               {
                 path: 'edit/:id',
@@ -89,9 +89,7 @@ export const routes: Routes = [
     {
       path: "landing" ,
       component:LandingComponent,
-      resolve: {
-        competitions: competitionResolver
-      },
+      //resolve: {competitions: competitionResolver},
       canActivate: [authGuard]
     },
     {
