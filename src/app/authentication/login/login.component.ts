@@ -40,6 +40,8 @@ export class LoginComponent {
           this.router.navigate(['/admin/dashboard']);
         } else if (userRole === 'ROLE_MEMBER') {
           this.router.navigate(['/landing']);
+        } else if (userRole === 'ROLE_JURY') {
+          this.router.navigate(['/jury']);
         } else {
           this.errorMessage = 'Unknown role. Access denied.';
         }

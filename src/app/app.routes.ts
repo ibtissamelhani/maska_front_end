@@ -13,19 +13,17 @@ import {UserComponent} from "./admin/User/users/user.component";
 import {UserResolverService} from "./core/resolvers/user-resolver.service";
 import {EditUserComponent} from "./admin/User/edit-user/edit-user.component";
 import {LandingComponent} from "./member/landing/landing.component";
-import {competitionResolver} from "./core/resolvers/competition.resolver";
 import {CompetitionDetailsComponent} from "./member/competition-details/competition-details.component";
 import {CompetitionComponent} from "./admin/Competition/competitions/competition.component";
 import {publicPagesGuard} from "./core/guards/public-pages.guard";
 import {EditCompetitionComponent} from "./admin/Competition/edit-competition/edit-competition.component";
 import {UsersLayoutComponent} from "./admin/User/users-layout/users-layout.component";
 import {CompetitionLayoutComponent} from "./admin/Competition/competition-layout/competition-layout.component";
-import {CompetitionResolverService} from "./core/resolvers/competition-resolver.service";
 import {SpeciesLayoutComponent} from "./admin/Specie/species-layout/species-layout.component";
 import {SpeciesComponent} from "./admin/Specie/species/species.component";
 import {speciesResolver} from "./core/resolvers/species.resolver";
 import {UpdateSpeciesComponent} from "./admin/Specie/update-species/update-species.component";
-
+import { DashboardComponent as JuryDashboardComponent} from "./jury/dashboard/dashboard.component"
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
     { path: 'forbidden', component: ForbiddenComponent },
@@ -97,5 +95,8 @@ export const routes: Routes = [
       component: CompetitionDetailsComponent,
       canActivate: [authGuard]
     },
+  {
+    path: 'jury', component: JuryDashboardComponent
+  },
     { path: '**', component: NotFoundComponent },
 ];
