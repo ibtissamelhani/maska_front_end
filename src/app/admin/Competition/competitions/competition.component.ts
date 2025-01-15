@@ -4,6 +4,7 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {Competition} from "../../../core/interfaces/competition";
 import {CompetitionService} from "../../../core/services/competition.service";
 import {Page} from "../../../core/interfaces/page";
+import {CreateComponent} from "../create/create.component";
 
 @Component({
   selector: 'app-competitions',
@@ -13,6 +14,7 @@ import {Page} from "../../../core/interfaces/page";
     NgForOf,
     NgIf,
     RouterLink,
+    CreateComponent,
   ],
   templateUrl: './competition.component.html',
 })
