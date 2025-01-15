@@ -3,7 +3,7 @@ import {API_BASE_URL} from "../constants/constants";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from "rxjs";
 import {Page} from "../interfaces/page";
-import {Competition} from "../interfaces/competition";
+import {Competition, CreateCompetitionVM} from "../interfaces/competition";
 
 @Injectable({
   providedIn: 'root'
@@ -29,4 +29,7 @@ export class CompetitionService {
     return this.http.put<Competition>(`${this.apiUrl}/competition/${id}`, competition);
   }
 
+  createCompetition(competition: CreateCompetitionVM): Observable<Competition> {
+    return this.http.post<Competition>(`${this.apiUrl}/competition`, competition);
+  }
 }

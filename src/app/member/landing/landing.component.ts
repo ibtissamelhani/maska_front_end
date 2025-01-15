@@ -25,6 +25,7 @@ export class LandingComponent implements OnInit{
   totalPages = 0;
   currentPage = 0;
   pageSize = 12;
+  isLoading = true;
 
   constructor(private competitionService: CompetitionService,private route: ActivatedRoute ) {
   }
@@ -58,6 +59,7 @@ export class LandingComponent implements OnInit{
   private fetchCompetition(): void {
     this.competitionService.getPaginatedCompetitions(this.currentPage, this.pageSize).subscribe((data: Page<Competition>) => {
       this.updatePageData(data);
+      this.isLoading = false;
     });
   }
 
