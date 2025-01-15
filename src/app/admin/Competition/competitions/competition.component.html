@@ -7,7 +7,6 @@
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-          <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
           <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
             <tr>
@@ -38,6 +37,14 @@
               </th>
             </tr>
             </thead>
+            <div *ngIf="isLoading" class="w-full max-w-md mx-auto animate-pulse p-9">
+              <h1 class="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>
+
+              <p class="w-48 h-2 mt-6 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p class="w-full h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p class="w-64 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p class="w-4/5 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
             <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
             <tr *ngFor="let competition of competitions">
               <td class="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{{ competition.code}}</td>
