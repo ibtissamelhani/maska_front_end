@@ -9,3 +9,11 @@ export interface Competition {
   openRegistration: boolean;
   numberOfParticipants?: number;
 }
+
+export interface CreateCompetitionVM {
+  location: string;
+  date: string;
+  minParticipants: number;
+  maxParticipants: number;
+  speciesType: 'BIRD' | 'BIG_GAME' | 'SEA';
+}

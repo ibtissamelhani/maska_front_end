@@ -27,7 +27,6 @@ export class CreateSpeciesComponent {
   constructor(
     private specieService: SpeciesService,
     private fb: FormBuilder,
-    private router: Router
   ) {
     this.speciesForm = this.fb.group({
       name: ['', Validators.required],
@@ -50,8 +49,8 @@ export class CreateSpeciesComponent {
 
     this.specieService.createSpecies(speciesData).subscribe({
       next: (createdSpecies) => {
-        this.speciesCreated.emit(createdSpecies); // Emit the created species
-        this.closeModal.emit(); // Close the modal
+        this.speciesCreated.emit(createdSpecies);
+        this.closeModal.emit();
         this.resetForm();
       },
       error: (error) => {
