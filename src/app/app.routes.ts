@@ -24,6 +24,10 @@ import {SpeciesComponent} from "./admin/Specie/species/species.component";
 import {speciesResolver} from "./core/resolvers/species.resolver";
 import {UpdateSpeciesComponent} from "./admin/Specie/update-species/update-species.component";
 import { DashboardComponent as JuryDashboardComponent} from "./jury/dashboard/dashboard.component"
+import {CompetitionsComponent as JuryCompetitionsComponent} from "./jury/competitions/competitions.component";
+import {ParticipationsComponent} from "./jury/participations/participations.component";
+import {participationResolver} from "./core/resolvers/participation.resolver";
+
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
     { path: 'forbidden', component: ForbiddenComponent },
@@ -96,7 +100,15 @@ export const routes: Routes = [
       canActivate: [authGuard]
     },
   {
-    path: 'jury', component: JuryDashboardComponent
+    path: 'jury', component: JuryDashboardComponent,
+    children:[
+      { path: '', component: JuryCompetitionsComponent},
+      {
+        path: 'participations/:competitionId',
+        component: ParticipationsComponent,
+        resolve:{participations: participationResolver}
+      }
+    ]
   },
     { path: '**', component: NotFoundComponent },
 ];
