@@ -2,14 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {IndexNavbarComponent} from "../../shared/navbars/index-navbar/index-navbar.component";
 import {User} from "../../core/interfaces/user";
 import {UserService} from "../../core/services/user.service";
-import {DatePipe} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
+import {UpdatProfileComponent} from "../updat-profile/updat-profile.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     IndexNavbarComponent,
-    DatePipe
+    DatePipe,
+    UpdatProfileComponent,
+    CommonModule
   ],
   templateUrl: './dashboard.component.html',
   styles: ``

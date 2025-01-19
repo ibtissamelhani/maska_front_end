@@ -10,3 +10,9 @@ export interface User {
   joinDate: string;
   licenseExpirationDate: string;
 }
+export interface UpdateUserVM {
+  username: string;
+  firstName: string;
+  lastName: string;
+  nationality: string;
+}

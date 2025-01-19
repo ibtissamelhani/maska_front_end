@@ -64,10 +64,14 @@
                 <dt class="mb-1 text-green-600 md:text-lg dark:text-gray-400">license Expiration Date</dt>
                 <dd class="text-lg font-semibold">{{ userProfile?.licenseExpirationDate | date: 'EEEE, MMMM d, yyyy'}}</dd>
               </div>
-
             </dl>
           </div>
         </div>
+      </div><div *ngIf="userProfile">
+      <app-updat-profile [user]="userProfile"></app-updat-profile>
+    </div>
+      <div *ngIf="!userProfile" class="p-4">
+        Loading user profile...
       </div>
     </div>
   </div>
