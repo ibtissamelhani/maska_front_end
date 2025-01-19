@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import {User} from "../interfaces/user";
 import {Page} from "../interfaces/page";
 import {SearchUser} from "../interfaces/search-user";
+import {jwtDecode} from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,18 @@ export class UserService {
 
   searchUsers(searchCriteria: SearchUser): Observable<any[]> {
     return this.http.post<any[]>(`${this.apiUrl}/users/search`, searchCriteria);
+  }
+
+  getUserProfile(): Observable<User> {
+    const token = localStorage.getItem('token');
+    let userId: string | null = null;
+
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      userId = decodedToken.id;
+    }
+    console.log(" user id" + userId)
+    return this.http.get<User>(`${this.apiUrl}/users/${userId}`);
   }
 
 }

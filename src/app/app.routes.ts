@@ -27,6 +27,7 @@ import { DashboardComponent as JuryDashboardComponent} from "./jury/dashboard/da
 import {CompetitionsComponent as JuryCompetitionsComponent} from "./jury/competitions/competitions.component";
 import {ParticipationsComponent} from "./jury/participations/participations.component";
 import {participationResolver} from "./core/resolvers/participation.resolver";
+import {DashboardComponent as UserDashboardComponent } from "./member/dashboard/dashboard.component"
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -97,6 +98,11 @@ export const routes: Routes = [
     {
       path: "details/:id",
       component: CompetitionDetailsComponent,
+      canActivate: [authGuard]
+    },
+    {
+      path: "profile",
+      component: UserDashboardComponent,
       canActivate: [authGuard]
     },
   {

@@ -21,15 +21,15 @@ export class AuthServiceService {
       map((response: AuthResponse)=> {
 
       if (response && response.token) {
-        localStorage.setItem('token', response.token); // Store token in localStorage
+        localStorage.setItem('token', response.token);
       } else {
         throw new Error('Authentication failed: Token is missing in the response.');
       }
       return response; // Return the complete response
     }),
     catchError((error: any) => {
-      console.error('Login error:', error); // Log the error
-      return throwError(() => new Error('Login failed. Please try again.')); // Return a users-friendly error
+      console.error('Login error:', error);
+      return throwError(() => new Error('Login failed. Please try again.'));
 
       })
     );
