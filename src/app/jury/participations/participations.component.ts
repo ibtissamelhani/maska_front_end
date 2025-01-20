@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {Page} from "../../core/interfaces/page";
 import {Participation} from "../../core/interfaces/participation";
 import {ParticipationService} from "../../core/services/participation.service";
@@ -9,7 +9,8 @@ import {CommonModule, NgForOf} from "@angular/common";
   selector: 'app-participations',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './participations.component.html',
   styles: ``
