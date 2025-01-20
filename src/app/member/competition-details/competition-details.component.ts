@@ -3,9 +3,10 @@ import {IndexNavbarComponent} from "../../shared/navbars/index-navbar/index-navb
 import {Competition} from "../../core/interfaces/competition";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CompetitionService} from "../../core/services/competition.service";
-import {DatePipe} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {ParticipationService} from "../../core/services/participation.service";
 import {ParticipationRequest} from "../../core/interfaces/participation";
+import {PodiumComponent} from "../podium/podium.component";
 
 @Component({
   selector: 'app-competitions-details',
@@ -13,7 +14,9 @@ import {ParticipationRequest} from "../../core/interfaces/participation";
   imports: [
     IndexNavbarComponent,
     DatePipe,
-    RouterLink
+    RouterLink,
+    PodiumComponent,
+    CommonModule
   ],
   templateUrl: './competition-details.component.html',
   styles: ``
