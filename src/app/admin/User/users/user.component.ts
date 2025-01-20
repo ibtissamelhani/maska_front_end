@@ -5,8 +5,16 @@ import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {User} from "../../../core/interfaces/user";
 import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/interfaces/page";
-import {debounceTime, distinctUntilChanged} from "rxjs";
+import {debounceTime, distinctUntilChanged, take} from "rxjs";
 import {SearchUser} from "../../../core/interfaces/search-user";
+import {Store} from "@ngrx/store";
+import {
+  selectAllUsers,
+  selectUsersError,
+  selectUsersLoading,
+  selectUsersPagination
+} from "../../../store/users/users.selectors";
+import {loadUsers} from "../../../store/users/users.actions";
 
 
 @Component({
@@ -24,15 +32,19 @@ import {SearchUser} from "../../../core/interfaces/search-user";
   styles: ``
 })
 export class UserComponent implements OnInit{
-  isLoading = false;
+
+  users$ = this.store.select(selectAllUsers);
+  isLoading$ = this.store.select(selectUsersLoading);
+  error$ = this.store.select(selectUsersError);
+  pagination$ = this.store.select(selectUsersPagination);
+
   searchForm: FormGroup;
-  users: User[] = [];
   totalElements = 0;
   totalPages = 0;
   currentPage = 0;
   pageSize = 10;
 
-  constructor(private route : ActivatedRoute, private userService: UserService,private fb: FormBuilder)
+  constructor(private route : ActivatedRoute, private userService: UserService,private fb: FormBuilder, private store: Store)
   {
     this.searchForm = this.fb.group({
       username: [''],
@@ -42,8 +54,7 @@ export class UserComponent implements OnInit{
 
   ngOnInit(): void {
     // Load resolved data for the first page
-    const resolvedData: Page<User> = this.route.snapshot.data['users'];
-    this.updatePageData(resolvedData);
+    this.store.dispatch(loadUsers({ page: 0, pageSize: 10 }));
 
     this.searchForm.valueChanges
       .pipe(
@@ -55,33 +66,42 @@ export class UserComponent implements OnInit{
       });
   }
 
-  private updatePageData(data: Page<User>): void {
+  /*private updatePageData(data: Page<User>): void {
     this.users = data.content;
     this.totalElements = data.totalElements;
     this.totalPages = data.totalPages;
-  }
+  }*/
+
 
 
   onPreviousPage(): void {
-    if (this.currentPage > 0) {
-      this.currentPage--;
-      this.fetchUsers();
-    }
+    this.pagination$.pipe(take(1)).subscribe(pagination => {
+      if (pagination.currentPage > 0) {
+        this.store.dispatch(loadUsers({
+          page: pagination.currentPage - 1,
+          pageSize: pagination.pageSize
+        }));
+      }
+    });
   }
 
 
   onNextPage(): void {
-    if (this.currentPage + 1 < this.totalPages) {
-      this.currentPage++;
-      this.fetchUsers();
-    }
+    this.pagination$.pipe(take(1)).subscribe(pagination => {
+      if (pagination.currentPage + 1 < pagination.totalPages) {
+        this.store.dispatch(loadUsers({
+          page: pagination.currentPage + 1,
+          pageSize: pagination.pageSize
+        }));
+      }
+    });
   }
 
   private fetchUsers(): void {
     this.userService.getPaginatedUsers(this.currentPage, this.pageSize).subscribe({
       next: (data: Page<User>) => {
         // Ce bloc est exécuté lorsque des données sont reçues avec succès.
-        this.updatePageData(data);
+        //this.updatePageData(data);
         console.log('Données reçues :', data);
       },
         error: (err: any) => {
@@ -111,16 +131,16 @@ export class UserComponent implements OnInit{
   }
 
   searchUsers(criteria: SearchUser) {
-    this.isLoading = true;
+    //this.isLoading = true;
     this.userService.searchUsers(criteria)
       .subscribe({
         next: (results) => {
-          this.users = results;
-          this.isLoading = false;
+          //this.users = results;
+          //this.isLoading = false;
         },
         error: (error) => {
           console.error('Search error:', error);
-          this.isLoading = false;
+          //this.isLoading = false;
         }
       });
   }
