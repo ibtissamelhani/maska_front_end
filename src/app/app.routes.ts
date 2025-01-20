@@ -108,7 +108,10 @@ export const routes: Routes = [
   {
     path: 'jury', component: JuryDashboardComponent,
     children:[
-      { path: '', component: JuryCompetitionsComponent},
+      {
+        path: '',
+        component: JuryCompetitionsComponent
+      },
       {
         path: 'participations/:competitionId',
         component: ParticipationsComponent,
