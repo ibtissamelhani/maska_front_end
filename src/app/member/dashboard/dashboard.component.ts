@@ -4,6 +4,7 @@ import {User} from "../../core/interfaces/user";
 import {UserService} from "../../core/services/user.service";
 import {CommonModule, DatePipe} from "@angular/common";
 import {UpdatProfileComponent} from "../updat-profile/updat-profile.component";
+import {CompetitionsComponent} from "../competitions/competitions.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ import {UpdatProfileComponent} from "../updat-profile/updat-profile.component";
     IndexNavbarComponent,
     DatePipe,
     UpdatProfileComponent,
-    CommonModule
+    CommonModule,
+    CompetitionsComponent
   ],
   templateUrl: './dashboard.component.html',
   styles: ``
