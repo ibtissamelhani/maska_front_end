@@ -28,6 +28,7 @@ import {CompetitionsComponent as JuryCompetitionsComponent} from "./jury/competi
 import {ParticipationsComponent} from "./jury/participations/participations.component";
 import {participationResolver} from "./core/resolvers/participation.resolver";
 import {DashboardComponent as UserDashboardComponent } from "./member/dashboard/dashboard.component"
+import {juryGuard} from "./core/guards/jury.guard";
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [publicPagesGuard]},
@@ -117,7 +118,8 @@ export const routes: Routes = [
         component: ParticipationsComponent,
         resolve:{participations: participationResolver}
       }
-    ]
+    ],
+    canActivate: [authGuard, juryGuard]
   },
     { path: '**', component: NotFoundComponent },
 ];
