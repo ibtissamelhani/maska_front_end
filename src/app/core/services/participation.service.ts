@@ -5,6 +5,7 @@ import {Participation, ParticipationRequest, ParticipationResultDTO} from "../in
 import {Observable} from "rxjs";
 import {Page} from "../interfaces/page";
 import {jwtDecode} from "jwt-decode";
+import {PodiumDTO} from "../interfaces/podium-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +43,8 @@ export class ParticipationService {
     return this.http.get<ParticipationResultDTO[]>(`${this.apiUrl}/participation/results`, { params });
   }
 
+  getTopThreeParticipants(competitionId: string): Observable<PodiumDTO[]> {
+    const params = new HttpParams().set('competitionId', competitionId);
+    return this.http.get<PodiumDTO[]>(`${this.apiUrl}/participation/podium`, { params });
+  }
 }

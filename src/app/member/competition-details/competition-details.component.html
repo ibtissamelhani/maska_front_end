@@ -6,9 +6,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
-    <div *ngIf="!competition?.openRegistration">
-      <app-podium/>
-    </div>
 
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" [src]="'assets/images/' + getSpeciesImage(competition?.speciesType)">
@@ -80,5 +77,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="competition && !competition?.openRegistration">
+    <app-podium [competitionId]="competition.id"/>
   </div>
 </section>
