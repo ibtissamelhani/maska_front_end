@@ -6,6 +6,10 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
+    <div *ngIf="!competition?.openRegistration">
+      <app-podium/>
+    </div>
+
     <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" [src]="'assets/images/' + getSpeciesImage(competition?.speciesType)">
       <div class="lg:w-1/2 w-full  lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -61,12 +65,17 @@
         <p><strong>Participants:</strong> {{ competition?.minParticipants || 'N/A' }} min /  {{ competition?.maxParticipants }} max</p>
         <p><strong>Registration Open:</strong> {{ competition?.openRegistration ? 'Yes' : 'No' }}</p>
         </div>
-        <div class="flex">
+        <div *ngIf="competition?.openRegistration" class="flex">
           <button
-            [disabled]="isLoading"
+            [disabled]="isLoading "
             (click)="participate()"
             class="flex ml-auto text-white bg-green-700 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">
             participate
+          </button>
+        </div>
+        <div *ngIf="!competition?.openRegistration" class="flex">
+          <button disabled class="bg-red-700 flex ml-auto items-center text-white  justify-center gap-x-3  text-sm sm:text-base   rounded-lg hover:bg-red-900 duration-300 transition-colors border px-8 py-2.5">
+            <span>Registration is Closed</span>
           </button>
         </div>
       </div>
