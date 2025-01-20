@@ -1,0 +1,15 @@
+<div class="toast-container" aria-live="polite" aria-atomic="true">
+  @for (toast of toasts(); track toast.id) {
+    <div
+      class="toast"
+      [class]="toast.type"
+      [@toastAnimation]
+      (click)="removeToast(toast.id)"
+    >
+      <div class="toast-content">
+        <span class="message">{{ toast.message }}</span>
+        <button class="close-button" (click)="removeToast(toast.id)">×</button>
+      </div>
+    </div>
+  }
+</div>
