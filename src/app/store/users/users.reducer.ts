@@ -24,7 +24,8 @@ export const usersReducer = createReducer(
     loading: false,
     users: data.content,
     totalElements: data.totalElements,
-    totalPages: data.totalPages
+    totalPages: data.totalPages,
+    currentPage: data.number,
   })),
   on(UsersActions.loadUsersFailure, (state, { error }) => ({
     ...state,

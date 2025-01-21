@@ -39,10 +39,6 @@ export class UserComponent implements OnInit{
   pagination$ = this.store.select(selectUsersPagination);
 
   searchForm: FormGroup;
-  totalElements = 0;
-  totalPages = 0;
-  currentPage = 0;
-  pageSize = 10;
 
   constructor(private route : ActivatedRoute, private userService: UserService,private fb: FormBuilder, private store: Store)
   {
@@ -73,7 +69,6 @@ export class UserComponent implements OnInit{
   }*/
 
 
-
   onPreviousPage(): void {
     this.pagination$.pipe(take(1)).subscribe(pagination => {
       if (pagination.currentPage > 0) {
@@ -88,6 +83,9 @@ export class UserComponent implements OnInit{
 
   onNextPage(): void {
     this.pagination$.pipe(take(1)).subscribe(pagination => {
+      console.log("cuuuuurrrreeeeennnt"+pagination.currentPage);
+      console.log("totaaal pages"+pagination.totalPages);
+      console.log("total elements"+pagination.totalElements);
       if (pagination.currentPage + 1 < pagination.totalPages) {
         this.store.dispatch(loadUsers({
           page: pagination.currentPage + 1,
@@ -98,7 +96,7 @@ export class UserComponent implements OnInit{
   }
 
   private fetchUsers(): void {
-    this.userService.getPaginatedUsers(this.currentPage, this.pageSize).subscribe({
+    this.userService.getPaginatedUsers(1, 10).subscribe({
       next: (data: Page<User>) => {
         // Ce bloc est exécuté lorsque des données sont reçues avec succès.
         //this.updatePageData(data);
