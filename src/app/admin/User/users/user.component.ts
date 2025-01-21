@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {CommonModule, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {User} from "../../../core/interfaces/user";
 import {UserService} from "../../../core/services/user.service";
-import {Page} from "../../../core/interfaces/page";
 import {debounceTime, distinctUntilChanged, take} from "rxjs";
 import {Store} from "@ngrx/store";
 import {
@@ -13,7 +11,7 @@ import {
   selectUsersLoading,
   selectUsersPagination
 } from "../../../store/users/users.selectors";
-import {loadUsers, searchUsers} from "../../../store/users/users.actions";
+import {deleteUser, loadUsers, searchUsers} from "../../../store/users/users.actions";
 
 
 @Component({
@@ -39,7 +37,7 @@ export class UserComponent implements OnInit{
 
   searchForm: FormGroup;
 
-  constructor(private route : ActivatedRoute, private userService: UserService,private fb: FormBuilder, private store: Store)
+  constructor(private userService: UserService,private fb: FormBuilder, private store: Store)
   {
     this.searchForm = this.fb.group({
       username: [''],
@@ -86,36 +84,9 @@ export class UserComponent implements OnInit{
     });
   }
 
-  private fetchUsers(): void {
-    this.userService.getPaginatedUsers(1, 10).subscribe({
-      next: (data: Page<User>) => {
-        // Ce bloc est exécuté lorsque des données sont reçues avec succès.
-        //this.updatePageData(data);
-        console.log('Données reçues :', data);
-      },
-        error: (err: any) => {
-        // Ce bloc est exécuté si une erreur survient lors de la requête.
-        console.error('Erreur lors de la récupération des utilisateurs :', err);
-      },
-        complete: () => {
-        // Ce bloc est exécuté lorsque l'observable a terminé son émission.
-        console.log('Récupération des utilisateurs terminée.');
-      },
-    });
-  }
-
   deleteUser(userId: string): void {
-    if (confirm('Are you sure you want to delete this users?')) {
-      this.userService.deleteUser(userId).subscribe({
-        next: () => {
-          alert('User deleted successfully');
-          this.fetchUsers();
-        },
-        error: (err) => {
-          console.error(err);
-          alert('Failed to delete users');
-        },
-      });
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.store.dispatch(deleteUser({ userId }));
     }
   }
 
