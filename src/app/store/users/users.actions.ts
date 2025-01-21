@@ -34,3 +34,4 @@ export const searchUsersFailure = createAction(
   '[Users] Search Users Failure',
   props<{ error: string }>()
 );
+

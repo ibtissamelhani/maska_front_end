@@ -6,7 +6,6 @@ import {User} from "../../../core/interfaces/user";
 import {UserService} from "../../../core/services/user.service";
 import {Page} from "../../../core/interfaces/page";
 import {debounceTime, distinctUntilChanged, take} from "rxjs";
-import {SearchUser} from "../../../core/interfaces/search-user";
 import {Store} from "@ngrx/store";
 import {
   selectAllUsers,
@@ -14,7 +13,7 @@ import {
   selectUsersLoading,
   selectUsersPagination
 } from "../../../store/users/users.selectors";
-import {loadUsers} from "../../../store/users/users.actions";
+import {loadUsers, searchUsers} from "../../../store/users/users.actions";
 
 
 @Component({
@@ -57,8 +56,8 @@ export class UserComponent implements OnInit{
         debounceTime(300),
         distinctUntilChanged()
       )
-      .subscribe(values => {
-        this.searchUsers(values);
+      .subscribe(criteria => {
+        this.store.dispatch(searchUsers({ criteria }));
       });
   }
 
@@ -120,20 +119,6 @@ export class UserComponent implements OnInit{
     }
   }
 
-  searchUsers(criteria: SearchUser) {
-    //this.isLoading = true;
-    this.userService.searchUsers(criteria)
-      .subscribe({
-        next: (results) => {
-          //this.users = results;
-          //this.isLoading = false;
-        },
-        error: (error) => {
-          console.error('Search error:', error);
-          //this.isLoading = false;
-        }
-      });
-  }
 
   getInitials(username: string): string {
     return username.split(' ').map(word => word[0].toUpperCase()).slice(0, 2).join('');

@@ -37,6 +37,15 @@ export const usersReducer = createReducer(
   on(UsersActions.searchUsersSuccess, (state, { users }) => ({
     ...state,
     users,
+    totalElements: users.length,
+    totalPages: Math.ceil(users.length / state.pageSize),
+    currentPage: 0,
     loading: false
+  })),
+  on(UsersActions.searchUsersFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error
   }))
+
 )
