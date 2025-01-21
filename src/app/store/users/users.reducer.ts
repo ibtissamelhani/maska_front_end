@@ -31,5 +31,12 @@ export const usersReducer = createReducer(
     ...state,
     loading: false,
     error
+  })),
+
+
+  on(UsersActions.searchUsersSuccess, (state, { users }) => ({
+    ...state,
+    users,
+    loading: false
   }))
 )
