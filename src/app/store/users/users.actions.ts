@@ -17,3 +17,20 @@ export const loadUsersFailure = createAction(
   '[Users] Load Users Failure',
   props<{ error: string }>()
 );
+
+
+
+export const searchUsers = createAction(
+  '[Users] Search Users',
+  props<{ criteria: any }>()
+);
+
+export const searchUsersSuccess = createAction(
+  '[Users] Search Users Success',
+  props<{ users: User[] }>()
+);
+
+export const searchUsersFailure = createAction(
+  '[Users] Search Users Failure',
+  props<{ error: string }>()
+);

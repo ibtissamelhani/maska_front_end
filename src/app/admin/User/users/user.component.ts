@@ -62,11 +62,6 @@ export class UserComponent implements OnInit{
       });
   }
 
-  /*private updatePageData(data: Page<User>): void {
-    this.users = data.content;
-    this.totalElements = data.totalElements;
-    this.totalPages = data.totalPages;
-  }*/
 
 
   onPreviousPage(): void {
@@ -83,9 +78,6 @@ export class UserComponent implements OnInit{
 
   onNextPage(): void {
     this.pagination$.pipe(take(1)).subscribe(pagination => {
-      console.log("cuuuuurrrreeeeennnt"+pagination.currentPage);
-      console.log("totaaal pages"+pagination.totalPages);
-      console.log("total elements"+pagination.totalElements);
       if (pagination.currentPage + 1 < pagination.totalPages) {
         this.store.dispatch(loadUsers({
           page: pagination.currentPage + 1,
