@@ -3,7 +3,7 @@
 describe('Home Page', ()=>{
 
   beforeEach(()=>{
-    cy.visit("http://localhost:4200")
+    cy.visit("/")
   })
 
   it('should display the header with background image', () => {
