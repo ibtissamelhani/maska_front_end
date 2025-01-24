@@ -6,7 +6,7 @@ import {CommonModule} from "@angular/common";
 import {Species} from "../../../core/interfaces/species";
 
 @Component({
-  selector: 'app-create-species',
+  selector: 'app-create-species-test',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -54,8 +54,8 @@ export class CreateSpeciesComponent {
         this.resetForm();
       },
       error: (error) => {
-        console.error('Error creating species:', error);
-        this.error = 'Failed to create species. Please try again.';
+        console.error('Error creating species-test:', error);
+        this.error = 'Failed to create species-test. Please try again.';
         this.isSubmitting = false;
       }
     });

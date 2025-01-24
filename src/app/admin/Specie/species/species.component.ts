@@ -7,7 +7,7 @@ import {NgClass, NgForOf} from "@angular/common";
 import {CreateSpeciesComponent} from "../create-species/create-species.component";
 
 @Component({
-  selector: 'app-species',
+  selector: 'app-species-test',
   standalone: true,
   imports: [
     NgForOf,
@@ -66,10 +66,10 @@ export class SpeciesComponent implements OnInit{
         console.log('Données reçues :', data);
       },
       error: (err: any) => {
-        console.error('Erreur lors de la récupération des species :', err);
+        console.error('Erreur lors de la récupération des species-test :', err);
       },
       complete: () => {
-        console.log('Récupération des species terminée.');
+        console.log('Récupération des species-test terminée.');
       },
     });
   }
