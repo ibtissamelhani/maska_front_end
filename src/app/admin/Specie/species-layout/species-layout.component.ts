@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 
 @Component({
-  selector: 'app-species-layout',
+  selector: 'app-species-test-layout',
   standalone: true,
     imports: [
         RouterOutlet
