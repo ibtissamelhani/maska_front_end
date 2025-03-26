@@ -6,7 +6,7 @@ import {CommonModule} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 @Component({
-  selector: 'app-update-species',
+  selector: 'app-update-species-test',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: 'update-species.component.html',
@@ -46,7 +46,7 @@ export class UpdateSpeciesComponent implements OnInit {
             difficulty: this.specie.difficulty
           });
         },
-        error: (err) => console.error('Error fetching species:', err)
+        error: (err) => console.error('Error fetching species-test:', err)
       });
     }
   }
@@ -62,11 +62,11 @@ export class UpdateSpeciesComponent implements OnInit {
       .subscribe({
         next: (updatedSpecies) => {
           this.isSubmitting = false;
-          console.log("updating species done")
+          console.log("updating species-test done")
           this.router.navigate(['/admin/species'])
         },
         error: (error) => {
-          console.error('Error updating species:', error);
+          console.error('Error updating species-test:', error);
           this.isSubmitting = false;
         }
       });

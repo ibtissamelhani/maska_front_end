@@ -28,5 +28,9 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": [
+    "cypress/**/*.ts",
+    "cypress/support/commands.d.ts" // Add this line
+  ]
 }
